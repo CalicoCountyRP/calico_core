@@ -13,9 +13,14 @@ const db = mysql.createConnection({
     database: process.env.database
 })
 
-app.get('/', (re, res)=> {
+app.get('/', (req, res)=> {
     return res.json("From Backend");
 })
+
+app.get('/auth/discord', (req, res) => {
+    return res.sendFile('dashboard.html', { root: '.' });
+})
+
 
 app.get('/char', (req, res) => {
     const charsql = "select charidentifier, firstname, lastname, job, discordid, money, age, character_desc, nickname, gender, hours from characters WHERE discordid = '243174457336791041'";
