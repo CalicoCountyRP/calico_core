@@ -17,16 +17,54 @@ app.get('/', (req, res)=> {
     return res.json("From Backend");
 })
 
-app.get('/auth/discord', (req, res) => {
-    return res.sendFile('dashboard.html', { root: '.' });
+app.get('/auth/discord/login', (req, res) => {
+    const url = process.env.discordlink
+    res.redirect(url)
 })
 
+app.get('/auth/discord/callback', async (req, res) => {
+    try {
+        // Extract query parameters from the request URL
+        const { access_token: accessToken, token_type: tokenType } = req.query;
 
-app.get('/char', (req, res) => {
+        if (!accessToken || !tokenType) {
+            return res.status(400).send("Access token or token type is missing");
+        }
+
+        // Use the access token to fetch user information
+        const userResponse = await fetch('https://discord.com/api/users/@me', {
+            method: 'GET',
+            headers: {
+                Authorization: `${tokenType} ${accessToken}`
+            }
+        });
+
+        if (!userResponse.ok) {
+            const errorText = await userResponse.text();
+            console.error("Failed to fetch user data from Discord:", errorText);
+            return res.status(userResponse.status).send("Failed to fetch user data from Discord");
+        }
+
+        const { id, username, avatar } = await userResponse.json();
+
+        // Example log or further processing
+        console.log(`User Info: ${id}, ${username}, ${avatar}`);
+
+        // Redirect to the client redirect URL
+        res.redirect(process.env.clientredirect);
+    } catch (error) {
+        console.error('Error during Discord OAuth callback:', error);
+        res.status(500).send("An error occurred during the authentication process.");
+    }
+});
+
+
+
+app.get('/char', (req, charres) => {
     const charsql = "select charidentifier, firstname, lastname, job, discordid, money, age, character_desc, nickname, gender, hours from characters WHERE discordid = '243174457336791041'";
     db.query(charsql, (err, data)=> {
-        if(err) return res.json(err);
-        return res.json(data);
+        if(err) return charres.json(err);
+        return charres.json(data);
     })
 })
 
@@ -46,6 +84,8 @@ app.get('/forsale', (req, res) => {
     })
 })
 
+const port = process.env.PORT || 8081
+
 app.listen(8081, ()=> {
-    console.log("listening");
+    console.log(`Server listening at ${port}`);
 })
