@@ -10,16 +10,19 @@ function DropdownMenu() {
 
     useEffect(() => {
       fetch('http://localhost:8081/char')
-      .then(res => res.json())
-      .then(data => setData(data))
-      .catch(err => console.log(err));
+        .then(res => res.json())
+        .then(data => setData(data))
+        .catch(err => console.log(err));
 
-    //fetch uniqueNames for dropdown
-    const uniqueNames = [...new Set(data.map((item) => item.name))];
-    setNames(uniqueNames);
+        console.log(data.firstname, data.lastname)
 
-    //sets initial table data
-    setFilteredData(data);
+        //fetch uniqueNames for dropdown
+        const uniqueNames = [...new Set(data.map((item) => `${item.firstname} ${item.lastname}`))];
+        console.log("Unique names:", uniqueNames); // Debugging unique names
+        setNames(uniqueNames);
+
+        //sets initial table data
+        setFilteredData(data);
     }, [])
 
     const handleSelectionChange = (event) => {
