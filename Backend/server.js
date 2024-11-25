@@ -23,44 +23,63 @@ app.get('/auth/discord/login', (req, res) => {
 })
 
 app.get('/auth/discord/callback', async (req, res) => {
-    try {
-        // Extract query parameters from the request URL
-        const { access_token: accessToken, token_type: tokenType } = req.query;
+    const code = req.query.code;
 
-        if (!accessToken || !tokenType) {
-            return res.status(400).send("Access token or token type is missing");
+    if (!code) {
+        return res.status(400).send('Authorization code missing');
+    }
+
+    try {
+        const tokenResponseData = await fetch('https://discord.com/api/oauth2/token', {
+            method: 'POST',
+            body: new URLSearchParams({
+                client_id: process.env.disocrdClientID,
+                client_secret: process.env.discordClientSecret,
+                code,
+                grant_type: 'authorization_code',
+                redirect_uri: process.env.redirectURI,
+                scope: 'identify',
+            }).toString(),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        });
+
+        const oauthData = await tokenResponseData.json();
+        const access_token = oauthData.access_token;
+
+        if (!access_token) {
+            console.error('Access Token not received from discord')
         }
 
-        // Use the access token to fetch user information
         const userResponse = await fetch('https://discord.com/api/users/@me', {
             method: 'GET',
             headers: {
-                Authorization: `${tokenType} ${accessToken}`
-            }
-        });
+                authorization: `Bearer ${access_token}`,
+            },
+        })
 
         if (!userResponse.ok) {
-            const errorText = await userResponse.text();
-            console.error("Failed to fetch user data from Discord:", errorText);
-            return res.status(userResponse.status).send("Failed to fetch user data from Discord");
+            const errorData = await userResponse.json();
+            console.error(`Failed to fetch user info: ${errorData.message}`);
         }
 
-        const { id, username, avatar } = await userResponse.json();
+        const userData = await userResponse.json();
+        console.log(`User Info: `, userData);
+        const user = { username: userData.username, id: userData.id }; // Replace with actual user info
+        const redirectURL = process.env.clientredirect
 
-        // Example log or further processing
-        console.log(`User Info: ${id}, ${username}, ${avatar}`);
+        res.redirect(`${redirectURL}/dashboard?user=${encodeURIComponent(JSON.stringify(user))}`);
 
-        // Redirect to the client redirect URL
-        res.redirect(process.env.clientredirect);
     } catch (error) {
-        console.error('Error during Discord OAuth callback:', error);
-        res.status(500).send("An error occurred during the authentication process.");
+        console.error('Error Processing Discord Callback:', error.response?.data || error.message);
+        res.send(500).send('Error during Discord authenticiation');
     }
-});
+})
 
 
 
-app.get('/char', (req, charres) => {
+app.get('/char', async (req, charres) => {
     const charsql = "select charidentifier, firstname, lastname, job, discordid, money, age, character_desc, nickname, gender, hours from characters WHERE discordid = '243174457336791041'";
     db.query(charsql, (err, data)=> {
         if(err) return charres.json(err);
@@ -68,8 +87,8 @@ app.get('/char', (req, charres) => {
     })
 })
 
-app.get('/properties', (req, res) => {
-    const propertiessql = "select * from playerhousing";
+app.get('/properties', async (req, res) => {
+    const propertiessql = "select id, taxledger, buyeridentifier from playerhousing";
     db.query(propertiessql, (err, data)=> {
         if(err) return res.json(err);
         return res.json(data);
