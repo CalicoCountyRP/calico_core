@@ -4,6 +4,7 @@ import DropdownMenu from './components/Dropdown';
 function Dashboard() {
   const [discordUsername, setdiscordUsername] = useState("");
   const [discordID, setDiscordID] = useState("");
+  const [discordGlobalName, setDiscordGlobalName] = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -14,12 +15,13 @@ function Dashboard() {
       console.log('Logged in user:', user.username, user.id);
       setdiscordUsername(user.username)
       setDiscordID(user.id)
+      setDiscordGlobalName(user.global)
     }
   }, []);
 
   return(
     <div>
-      <h1>Welcome to the Dashboard {discordUsername}, {discordID}!</h1>
+      <h1>Dashboard</h1><p>Welcome Back, {discordGlobalName}!</p>
       <br />
       <DropdownMenu discordID={ discordID } />
     </div>

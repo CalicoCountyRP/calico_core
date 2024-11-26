@@ -65,8 +65,10 @@ app.get('/auth/discord/callback', async (req, res) => {
         }
 
         const userData = await userResponse.json();
-        const user = { username: userData.username, id: userData.id }; // Replace with actual user info
+        const user = { username: userData.username, id: userData.id, global: userData.global_name }; // Replace with actual user info
         const redirectURL = process.env.clientredirect
+
+        console.log(userData)
 
         res.redirect(`${redirectURL}/dashboard?user=${encodeURIComponent(JSON.stringify(user))}`);
 
@@ -78,7 +80,6 @@ app.get('/auth/discord/callback', async (req, res) => {
 
 app.get('/char/:id', async (req, charres) => {
     const { id } = req.params;
-    console.log(`id: ${id}`)
     if (!id) {
         console.log("Id is missing")
     }
