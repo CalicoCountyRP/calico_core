@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import DropdownMenu from './components/Dropdown';
+import SidebarNav from './components/Sidebar'
+import SkillsCardGrid from './components/Skills';
+import AccountInfo from './components/AcountInfo';
+import BuisnessGrid from './components/Buisnesses';
+import './App.css'
 
 function Dashboard() {
   const [discordUsername, setdiscordUsername] = useState("");
@@ -20,10 +25,20 @@ function Dashboard() {
   }, []);
 
   return(
-    <div>
+    <div className='container'>
       <h1>Dashboard</h1><p>Welcome Back, {discordGlobalName}!</p>
       <br />
-      <DropdownMenu discordID={ discordID } />
+      <SidebarNav />
+      <br />
+      <div>
+        <h1><u>Account Info</u></h1>
+        <AccountInfo discordID={ discordID } />
+      </div>
+      <br />
+      <div>
+        <h1><u>Character Info</u></h1>
+        <SkillsCardGrid discordID={ discordID } />
+      </div>
     </div>
   )
 };
