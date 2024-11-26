@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, Typography, CardMedia } from '@mui/material';
 
-function SkillsCardGrid({ discordID }) {
+function SkillsCardGrid() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const discordID = localStorage.getItem('discordID');
 
     useEffect(() => {
         const fetchData = async () => {
