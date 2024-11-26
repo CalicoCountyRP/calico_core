@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-function DropdownMenu() {
+function DropdownMenu({ discordID }) {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedName, setSelectedName] = useState("");
   const [names, setNames] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!discordID) {
+            console.log("Error, no discord ID provided")
+            return;
+        }
         setIsLoading(true);
-        const response = await fetch("http://localhost:8081/char");
+        console.log(`Fetching data for discordID: ${discordID}`)
+        const response = await fetch(`http://localhost:8081/char/${discordID}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -33,9 +38,8 @@ function DropdownMenu() {
         setIsLoading(false);
       }
     };
-
-    fetchData();
-  }, []);
+        fetchData();
+  }, [discordID]);
 
   const handleSelectionChange = (event) => {
     const selectedFullName = event.target.value;
