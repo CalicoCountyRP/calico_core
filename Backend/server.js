@@ -65,7 +65,6 @@ app.get('/auth/discord/callback', async (req, res) => {
         }
 
         const userData = await userResponse.json();
-        console.log(`User Info: `, userData);
         const user = { username: userData.username, id: userData.id }; // Replace with actual user info
         const redirectURL = process.env.clientredirect
 
@@ -77,11 +76,14 @@ app.get('/auth/discord/callback', async (req, res) => {
     }
 })
 
-
-
-app.get('/char', async (req, charres) => {
-    const charsql = "select charidentifier, firstname, lastname, job, discordid, money, age, character_desc, nickname, gender, hours from characters WHERE discordid = '243174457336791041'";
-    db.query(charsql, (err, data)=> {
+app.get('/char/:id', async (req, charres) => {
+    const { id } = req.params;
+    console.log(`id: ${id}`)
+    if (!id) {
+        console.log("Id is missing")
+    }
+    const charsql = `select charidentifier, firstname, lastname, job, discordid, money, age, character_desc, nickname, gender, hours from characters WHERE discordid = ?`;
+    db.query(charsql, [id], (err, data) => {
         if(err) return charres.json(err);
         return charres.json(data);
     })
