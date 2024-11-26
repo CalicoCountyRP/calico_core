@@ -79,11 +79,11 @@ app.get('/auth/discord/callback', async (req, res) => {
 })
 
 app.get('/char/:id', async (req, charres) => {
-    const { id } = req.params;
+    const { id } = req.params
     if (!id) {
         console.log("Id is missing")
     }
-    const charsql = `select charidentifier, firstname, lastname, job, discordid, money, age, character_desc, nickname, gender, hours from characters WHERE discordid = ?`;
+    const charsql = `select identifier, charidentifier, firstname, lastname, job, discordid, money, age, character_desc, nickname, gender, hours, LastLogin from characters WHERE discordid = ?`;
     db.query(charsql, [id], (err, data) => {
         if(err) return charres.json(err);
         return charres.json(data);
@@ -97,6 +97,27 @@ app.get('/properties', async (req, res) => {
         return res.json(data);
     })
 })
+
+app.get('/ownedproperties', async(req, res) => {
+    const { steamID } = req.params
+    if (!steamID) {
+        console.log("Steam Id is missing")
+    }
+    const ownedpropertysql = 'select id, taxledger, from playerhousing WHERE buyeridentifier = ? AND owned = 1';
+    db.query(ownedpropertysql, [steamID], (err, data) => {
+        if(err) return ownedpropertysql.json(err);
+        return res.json(data);
+    })
+})
+
+app.get('/getBuisnesses', async(req, res) => {
+    const shopssql = 'select name, id from society_shops';
+    db.query(shopssql, (err, data) => {
+        if(err) return shopssql.json(err);
+        return res.json(data);
+    })
+})
+
 
 app.get('/forsale', (req, res) => {
     const forsalesql = "select id, tax, price from playerhousing WHERE owned = 0";
