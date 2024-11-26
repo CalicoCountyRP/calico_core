@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import DropdownMenu from './components/Dropdown';
-import SidebarNav from './components/Sidebar'
-import SkillsCardGrid from './components/Skills';
-import AccountInfo from './components/AcountInfo';
-import BuisnessGrid from './components/Buisnesses';
-import './App.css'
+import DropdownMenu from '../components/Dropdown';
+import SidebarNav from '../components/Sidebar'
+import SkillsCardGrid from '../components/Skills';
+import AccountInfo from '../components/AcountInfo';
+import BuisnessGrid from '../components/Buisnesses';
+import '../App.css'
 
 function Dashboard() {
   const [discordUsername, setdiscordUsername] = useState("");
@@ -16,28 +16,23 @@ function Dashboard() {
     const user = params.get('user') ? JSON.parse(params.get('user')) : null;
 
     if (user) {
-      const {username, id} = user;
-      console.log('Logged in user:', user.username, user.id);
+      console.log('Logged in user:', user.username, user.id, user);
       setdiscordUsername(user.username)
       setDiscordID(user.id)
       setDiscordGlobalName(user.global)
+      localStorage.setItem('discordID', user.id)
     }
   }, []);
 
   return(
-    <div className='container'>
-      <h1>Dashboard</h1><p>Welcome Back, {discordGlobalName}!</p>
-      <br />
+    <div className="content">
       <SidebarNav />
-      <br />
-      <div>
+      <div className="test">
+        <h1>Dashboard</h1>
+        <p>Welcome Back, {discordGlobalName}!</p>
+        <br />
         <h1><u>Account Info</u></h1>
-        <AccountInfo discordID={ discordID } />
-      </div>
-      <br />
-      <div>
-        <h1><u>Character Info</u></h1>
-        <SkillsCardGrid discordID={ discordID } />
+        <AccountInfo />
       </div>
     </div>
   )

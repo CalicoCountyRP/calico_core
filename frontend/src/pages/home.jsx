@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './assets/react.svg';
-import DropdownMenu from './components/Dropdown';
-import DiscordButton from './components/Discordbutton';
+import logo from '../assets/react.svg';
+import DropdownMenu from '../components/Dropdown';
+import DiscordButton from '../components/Discordbutton';
 
 const Home = () => {
     return( 

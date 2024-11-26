@@ -1,12 +1,12 @@
 import React from 'react';
-import SidebarNav from './components/Sidebar';
+import SidebarNav from '../components/Sidebar';
 
 const Properties = () => {
     return (
-        <div>
+        <div className="content">
+            <SidebarNav />
             <h1>Properties Component</h1>
             <p>This is the properties component.</p>
-            <SidebarNav />
         </div>
     );
 };
