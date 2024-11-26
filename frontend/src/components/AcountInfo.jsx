@@ -3,6 +3,8 @@ import { Grid2, Card, CardContent, Typography, CardMedia } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 
+const discordID = localStorage.getItem('discordID');
+
 const cards = [
   {
     id: 1,
@@ -55,7 +57,7 @@ const rows = [
     },
   ];
 
-function SkillsCardGrid({ discordID }) {
+function SkillsCardGrid() {
     return (
         <div>
             <div>
@@ -65,8 +67,8 @@ function SkillsCardGrid({ discordID }) {
                         <Card>
                         <CardContent>
                             <Typography variant="h5" component="div"> {card.title} </Typography>
-                            <Typography variant="body2" color="text.secondary"> Discord: {card.description} </Typography>
-                            <Typography variant="body2" color="text.secondary"> Steam: {card.description} </Typography>
+                            <Typography variant="body2" color="text.secondary"> Discord: { discordID } </Typography>
+                            <Typography variant="body2" color="text.secondary"> Steam: STEAM64 </Typography>
                         </CardContent>
                         </Card>
                     </Grid2>

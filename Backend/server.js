@@ -70,7 +70,7 @@ app.get('/auth/discord/callback', async (req, res) => {
 
         console.log(userData)
 
-        res.redirect(`${redirectURL}/dashboard?user=${encodeURIComponent(JSON.stringify(user))}`);
+        res.redirect(`${redirectURL}/pages/dashboard?user=${encodeURIComponent(JSON.stringify(user))}`);
 
     } catch (error) {
         console.error('Error Processing Discord Callback:', error.response?.data || error.message);

@@ -11,6 +11,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@mui/icons-material": "^6.1.8",
+    "@mui/material": "^6.1.8",
     "backend": "file:",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
