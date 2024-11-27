@@ -111,7 +111,7 @@ app.get('/ownedproperties', async(req, res) => {
 })
 
 app.get('/getBuisnesses', async(req, res) => {
-    const shopssql = 'select name, id from society_shops';
+    const shopssql = 'select name, id from society_shops WHERE forsale = 1';
     db.query(shopssql, (err, data) => {
         if(err) return shopssql.json(err);
         return res.json(data);
