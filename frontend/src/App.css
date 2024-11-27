@@ -32,9 +32,9 @@
 }
 
 .content {
-  display: flex;
-  height: 100%; 
-  direction: ltr;
+  margin-top: 40px;
+  margin-left: 250px;
+  padding: 20px;
 }
 
 .test {
@@ -42,5 +42,29 @@
 }
 
 .sidebar-container {
-    margin-right: 15px; /* Adjust the value as needed */
+  margin-right: 15px; /* Adjust the value as needed */
+}
+
+.topNav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.sidenav {
+  position: fixed;
+  top: 64px; /* Adjust based on the height of your TopBar */
+  left: 0;
+  width: 250px; /* Adjust the width as needed */
+  height: calc(100% - 64px); /* Adjust based on the height of your TopBar */
+  overflow-y: auto;
+  background-color: #fff; /* Optional: Set a background color */
+  z-index: 999; /* Ensure it stays on top of other content */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-button {
+  margin: 10px; /* Adjust the value as needed */
 }

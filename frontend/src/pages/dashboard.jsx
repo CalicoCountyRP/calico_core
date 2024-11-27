@@ -4,6 +4,8 @@ import SidebarNav from '../components/Sidebar'
 import SkillsCardGrid from '../components/Skills';
 import AccountInfo from '../components/AcountInfo';
 import BuisnessGrid from '../components/Buisnesses';
+import TopBar from '../components/topbar';
+import DashboardButtons from '../components/dashboardbuttons';
 import '../App.css'
 
 function Dashboard() {
@@ -26,11 +28,15 @@ function Dashboard() {
 
   return(
     <div className="content">
+      <div className="topNav">
+        <TopBar />
+      </div>
       <SidebarNav />
       <div className="test">
         <h1>Dashboard</h1>
         <p>Welcome Back, {discordGlobalName}!</p>
         <br />
+        <DashboardButtons />
         <h1><u>Account Info</u></h1>
         <AccountInfo />
       </div>
