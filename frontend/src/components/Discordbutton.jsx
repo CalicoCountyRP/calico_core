@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 function DiscordButton() {
     return (
     <div>
-        <Button variant="contained" href='http://localhost:8081/auth/discord/login'> Login With Discord </Button>
+        <Button className="discordButton" variant="contained" href='http://localhost:8081/auth/discord/login'> Login With Discord </Button>
     </div>
     )
 }

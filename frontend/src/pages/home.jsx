@@ -9,6 +9,7 @@ const Home = () => {
         <div className="home-container">
             <img src={logo} width={250} height={250} alt="Logo" />
             <h1>Calico County Core</h1>
+            <p>Please Login with Discord</p>
             <DiscordButton />
         </div>
     )
