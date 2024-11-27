@@ -1,13 +1,14 @@
 import React from 'react';
-import logo from '../assets/react.svg';
+import logo from '../assets/cclogo.png';
 import DropdownMenu from '../components/Dropdown';
 import DiscordButton from '../components/Discordbutton';
+import '../App.css'; // Make sure to import the CSS file
 
 const Home = () => {
     return( 
-        <div style={{height: '150px', display: 'block', margin: '50px auto', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <img src={logo} width={100} height={100} />
-            <h1>Core</h1>
+        <div className="home-container">
+            <img src={logo} width={250} height={250} alt="Logo" />
+            <h1>Calico County Core</h1>
             <DiscordButton />
         </div>
     )
