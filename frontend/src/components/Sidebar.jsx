@@ -16,6 +16,11 @@ function SidebarNav() {
                         <MenuItem component={<Link to="/pages/properties" />}>Properties</MenuItem>
                     </SubMenu>
                     <MenuItem component={<Link to="/pages/government" />}>Government</MenuItem>
+                    <SubMenu label="Applications" >
+                        <MenuItem component={<Link to="/pages/applications/staff" />}>Staff Application</MenuItem>
+                        <MenuItem component={<Link to="/pages/applications/developer" />}>Developer Application</MenuItem>
+                        <MenuItem component={<Link to="/pages/applications/tester" />}>Dev Tester Application</MenuItem>
+                    </SubMenu>
                 </Menu>
             </Sidebar>
         </div>

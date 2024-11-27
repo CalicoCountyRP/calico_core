@@ -7,6 +7,9 @@ import Properties from './pages/properties'
 import Stable from './pages/stable'
 import Character from './pages/character';
 import Government from './pages/government';
+import Staffapp from './pages/applications/staff';
+import Developerapp from './pages/applications/developer';
+import Testapp from './pages/applications/tester';
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
         <Route path="/pages/stable" element={<Stable />} />
         <Route path="/pages/character" element={<Character />} />
         <Route path="/pages/government" element={<Government />} />
+        <Route path="/pages/applications/staff" element={<Staffapp />} />
+        <Route path="/pages/applications/developer" element={<Developerapp />} />
+        <Route path="/pages/applications/tester" element={<Testapp />} />
       </Routes>
     </Router>
   )
