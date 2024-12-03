@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, CardActions, Button, Typography, CardMedia } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function BuisnessGrid() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,9 +34,11 @@ function BuisnessGrid() {
         fetchData();
     }, []);
 
-    const handleButtonClick = (id) => {
+    const handleButtonClick = (id, name, image) => {
+        const info = { id: {id}, name: {name}, image: {image} };
+        //navigate(`/buisnessInfo/info=${encodeURIComponent(JSON.stringify(info))}`); // Navigate to the desired page
         // Define what happens when the button is clicked (e.g., log the ID)
-        console.log(`Button clicked for character with ID: ${id}`);
+        console.log(`Button clicked for character with ID: ${id}, ${name}, ${image}`);
     };
 
     if (isLoading) {
@@ -53,7 +57,7 @@ function BuisnessGrid() {
                         <CardMedia
                             component="img"
                             height="140"
-                            image={item.imageUrl}
+                            image={item.image}
                             alt={item.name}
                         />
                         <CardContent>
@@ -61,11 +65,29 @@ function BuisnessGrid() {
                                 {item.name}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                {item.description}
+                                Property ID: {item.id}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Location: Great Plains
                             </Typography>
                         </CardContent>
-                        <CardActions>
-                            <Button size="small" onClick={() => handleButtonClick(item.id)}>Learn More</Button>
+                        <CardActions sx={{ justifyContent: 'center' }}>
+                            <Button
+                                size="small"
+                                onClick={() => handleButtonClick(item.id, item.name, item.image)}
+                                sx={{
+                                    backgroundColor: '#1976d2', // Primary color
+                                    color: 'white',
+                                    '&:hover': {
+                                        backgroundColor: '#115293', // Darker shade for hover state
+                                    },
+                                    borderRadius: '8px', // Rounded corners
+                                    padding: '8px 16px', // Padding
+                                    fontSize: '14px', // Font size
+                                }}
+                            >
+                                View Business
+                            </Button>
                         </CardActions>
                     </Card>
                 </Grid2>

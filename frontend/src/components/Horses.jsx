@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, CardActions, Button, Typography, CardMedia } from '@mui/material';
 
-function BuisnessGrid() {
+function Horses({ steamID }) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -10,17 +10,13 @@ function BuisnessGrid() {
         const fetchData = async () => {
             try {
                 setIsLoading(true);
-
-                const response = await fetch(`http://localhost:8081/properties`);
+                const response = await fetch(`http://localhost:8081/getHorses/${steamID}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
                 }
                 const result = await response.json();
-
-                const flattenedData = result.flat();
-                setData(flattenedData);
-
-                console.log(flattenedData);
+                setData(result);
+                console.log(result);
 
             } catch (err) {
                 setError(err.message);
@@ -30,7 +26,7 @@ function BuisnessGrid() {
             }
         };
         fetchData();
-    }, []);
+    }, [steamID]);
 
     const handleButtonClick = (id) => {
         // Define what happens when the button is clicked (e.g., log the ID)
@@ -74,4 +70,4 @@ function BuisnessGrid() {
     );
 }
 
-export default BuisnessGrid;
+export default Horses;

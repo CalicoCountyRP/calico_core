@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, CardActions, Button, Typography, CardMedia } from '@mui/material';
 
-function BuisnessGrid() {
+
+const OwnedProperties = () => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -11,7 +12,7 @@ function BuisnessGrid() {
             try {
                 setIsLoading(true);
 
-                const response = await fetch(`http://localhost:8081/properties`);
+                const response = await fetch(`http://localhost:8081/ownedproperties`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
                 }
@@ -45,6 +46,7 @@ function BuisnessGrid() {
         return <Typography>Error: {error}</Typography>;
     }
 
+
     return (
         <Grid2 container spacing={2}>
             {data.map((item) => (
@@ -72,6 +74,6 @@ function BuisnessGrid() {
             ))}
         </Grid2>
     );
-}
+};
 
-export default BuisnessGrid;
+export default OwnedProperties;

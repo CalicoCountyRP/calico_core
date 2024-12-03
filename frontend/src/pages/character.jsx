@@ -3,6 +3,7 @@ import SkillsCardGrid from '../components/Skills';
 import SidebarNav from '../components/Sidebar';
 import TopBar from '../components/topbar';
 import '../App.css';
+import OwnedProperties from '../components/OwnedProperties';
 
 const Character = () => {
     return (
@@ -16,6 +17,8 @@ const Character = () => {
             <div className='test'>
                 <h1>Characters</h1>
                 <SkillsCardGrid />
+                <br />
+                {/* <OwnedProperties /> */}
             </div>
         </div>
     );

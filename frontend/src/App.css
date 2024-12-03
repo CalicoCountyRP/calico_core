@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 body {
-  background-color: #1e1e1e;
   margin: 0;
   padding: 0;
 }
@@ -74,8 +73,12 @@ body {
   overflow-x: hidden;
 }
 
-.dashboard-button {
-  margin: 10px; /* Adjust the value as needed */
+.dashboard-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .home-container {
@@ -95,11 +98,6 @@ body {
   margin-top: 1px;
   margin-bottom: 0px; /* Space between the text and the button */
   font-family: 'Playfair Display', serif; /* Apply Playfair Display font */
-  color:#EFEADF;
-}
-
-.home-container p {
-  color:#EFEADF;
 }
 
 .menu {

@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 const handleLogout = () => {
+    localStorage.clear();
     // Add your logout logic here
     console.log('Logout button clicked');
 };

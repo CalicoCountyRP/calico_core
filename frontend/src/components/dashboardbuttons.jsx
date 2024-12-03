@@ -7,8 +7,7 @@ const DashboardButtons = () => {
         <div className="dashboard-buttons">
             <Button
                 variant="contained"
-                sx={{ margin: 1 }} // Add margin using the sx prop
-                href="https://example.com/rules"
+                href="https://rules.calicocountyrp.com"
                 target="_blank"
                 rel="noopener noreferrer"
             >
@@ -16,8 +15,7 @@ const DashboardButtons = () => {
             </Button>
             <Button
                 variant="contained"
-                sx={{ margin: 1 }} // Add margin using the sx prop
-                href="#"
+                href="redm://connect/play.calicocountyrp.com:30140"
                 target="_blank"
                 rel="noopener noreferrer"
             >
@@ -25,7 +23,6 @@ const DashboardButtons = () => {
             </Button>
             <Button
                 variant="contained"
-                sx={{ margin: 1 }} // Add margin using the sx prop
                 href="https://discord.gg/ryRfCvnyuJ"
                 target="_blank"
                 rel="noopener noreferrer"

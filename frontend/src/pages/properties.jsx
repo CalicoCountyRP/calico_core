@@ -1,6 +1,7 @@
 import React from 'react';
 import SidebarNav from '../components/Sidebar';
 import TopBar from '../components/topbar';
+import PropertyGrid from '../components/Properties';
 
 const Properties = () => {
     return (
@@ -9,8 +10,8 @@ const Properties = () => {
                 <TopBar />
             </div>
             <SidebarNav />
-            <h1>Properties Component</h1>
-            <p>This is the properties component.</p>
+            <h1>Properties</h1>
+            <PropertyGrid />
         </div>
     );
 };
