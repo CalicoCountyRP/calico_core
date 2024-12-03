@@ -65,10 +65,10 @@ app.get('/auth/discord/callback', async (req, res) => {
         }
 
         const userData = await userResponse.json();
+
         const user = { username: userData.username, id: userData.id, global: userData.global_name }; // Replace with actual user info
         const redirectURL = process.env.clientredirect
 
-        console.log(userData)
 
         res.redirect(`${redirectURL}/pages/dashboard?user=${encodeURIComponent(JSON.stringify(user))}`);
 
@@ -90,8 +90,44 @@ app.get('/char/:id', async (req, charres) => {
     })
 })
 
+app.get('/getsteam/:id', async (req, res) => {
+    const { id } = req.params
+    if (!id) {
+        console.log("Id is missing")
+    }
+    const steamquery = `SELECT identifier FROM characters WHERE discordid = '243174457336791041' LIMIT 1`;
+    db.query(steamquery, [id], (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+app.get('/getHorses/:id', async (req, res) => {
+    const {id} = req.params
+    if (!id) {
+        console.log("Id is missing")
+    }
+    const horsequery = `SELECT charid, name, gender, xp, born from player_horses WHERE  dead = 0 AND identifier = ?`;
+    db.query(horsequery, [id], (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+app.get('/getVehicles/:id', async (req, res) => {
+    const {id} = req.params
+    if (!id) {
+        console.log("Id is missing")
+    }
+    const horsequery = `SELECT * from player_wagons WHERE identifier = ?`;
+    db.query(horsequery, [id], (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
 app.get('/properties', async (req, res) => {
-    const propertiessql = "select id, taxledger, buyeridentifier from playerhousing";
+    const propertiessql = "select id, taxledger, buyeridentifier from playerhousing WHERE owned = 0";
     db.query(propertiessql, (err, data)=> {
         if(err) return res.json(err);
         return res.json(data);
@@ -111,7 +147,7 @@ app.get('/ownedproperties', async(req, res) => {
 })
 
 app.get('/getBuisnesses', async(req, res) => {
-    const shopssql = 'select name, id from society_shops WHERE forsale = 1';
+    const shopssql = 'select name, id, image from society_shops WHERE forsale = 1';
     db.query(shopssql, (err, data) => {
         if(err) return shopssql.json(err);
         return res.json(data);
