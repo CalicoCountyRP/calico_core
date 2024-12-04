@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, CardActions, Button, Typography, CardMedia } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function BuisnessGrid() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,8 +34,16 @@ function BuisnessGrid() {
         fetchData();
     }, []);
 
-    const handleButtonClick = (id) => {
-        // Define what happens when the button is clicked (e.g., log the ID)
+    const handleButtonClick = (id, taxledger) => {
+        const info = {
+            id:id,
+            taxledger:taxledger
+        }
+
+        console.log(info)
+ 
+        navigate(`/PropertyInfo/${id}`, { state: info });
+
         console.log(`Button clicked for character with ID: ${id}`);
     };
 
@@ -58,14 +68,27 @@ function BuisnessGrid() {
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                                {item.name}
+                                {item.id}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                {item.description}
+                                {item.taxledger}
                             </Typography>
                         </CardContent>
-                        <CardActions>
-                            <Button size="small" onClick={() => handleButtonClick(item.id)}>Learn More</Button>
+                        <CardActions sx={{ justifyContent: 'center' }}>
+                            <Button size="small" 
+                            onClick={() => handleButtonClick(item.id, item.taxledger)} 
+                            sx={{
+                                backgroundColor: '#1976d2', // Primary color
+                                color: 'white',
+                                '&:hover': {
+                                    backgroundColor: '#115293', // Darker shade for hover state
+                                },
+                                borderRadius: '8px', // Rounded corners
+                                padding: '8px 16px', // Padding
+                                fontSize: '14px', // Font size
+                            }}
+                            >
+                                View Property</Button>
                         </CardActions>
                     </Card>
                 </Grid2>
