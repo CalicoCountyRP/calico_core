@@ -14,7 +14,7 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
-
+  const [auth, setAuth] = useState(false);
 
 
   useEffect(() => {
