@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 
 const handleLogout = () => {
     localStorage.clear();
+    
     // Add your logout logic here
     console.log('Logout button clicked');
 };
@@ -19,7 +20,7 @@ const TopBar = () => {
                     Calico County Core
                 </Typography>
                 <Stack direction="row" spacing={2}>
-                    <Button color="inherit" onClick={handleLogout}>
+                    <Button color="inherit" onClick={handleLogout} href='http://localhost:8081/logout'>
                         Logout
                     </Button>
                 </Stack>
