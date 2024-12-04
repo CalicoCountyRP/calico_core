@@ -79,7 +79,7 @@ app.get('/auth/discord/callback', async (req, res) => {
 })
 
 app.get('/logout', async (req, res) => {
-    res.redirect('http://localhost:5173/');
+    res.redirect(process.env.urlbase);
 })
 
 app.get('/char/:id', async (req, charres) => {
