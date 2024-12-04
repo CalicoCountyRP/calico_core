@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, CardActions, Button, Typography, CardMedia } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-function BuisnessGrid() {
+function BuisnessGrid( {businessData} ) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [bizData, setBizData] = useState(businessData);
     const navigate = useNavigate();
 
     useEffect(() => {
+
         const fetchData = async () => {
             try {
                 setIsLoading(true);
@@ -32,12 +34,20 @@ function BuisnessGrid() {
             }
         };
         fetchData();
-    }, []);
+        setBizData(businessData);
+    }, [businessData]);
 
     const handleButtonClick = (id, name, image) => {
-        const info = { id: {id}, name: {name}, image: {image} };
-        //navigate(`/buisnessInfo/info=${encodeURIComponent(JSON.stringify(info))}`); // Navigate to the desired page
-        // Define what happens when the button is clicked (e.g., log the ID)
+        const info = {
+            id:id,
+            name:name,
+            image:image
+        }
+
+        console.log(info)
+ 
+        navigate(`/buisnessinfo/${id}`, { state: info });
+
         console.log(`Button clicked for character with ID: ${id}, ${name}, ${image}`);
     };
 
