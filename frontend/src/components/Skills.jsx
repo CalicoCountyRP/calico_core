@@ -51,7 +51,7 @@ function SkillsCardGrid() {
                 <CardContent>
                   <Typography variant="h5" component="div">{card.firstname} {card.lastname}</Typography>
                   <br />
-                  <Typography variant="body2" color="text.secondary"><b>ID:</b> {card.charidentifier} </Typography>
+                  <Typography variant="body2" color="text.secondary"><b>DB ID:</b> {card.charidentifier} </Typography>
                   <Typography variant="body2" color="text.secondary"><b>Last Login:</b> {card.LastLogin}</Typography>
                   <Typography variant="body2" color="text.secondary"><b>Money on Hand:</b> {card.money} </Typography>
                   <Typography variant="body2" color="text.secondary"><b>Total Money in Bank:</b> </Typography>
