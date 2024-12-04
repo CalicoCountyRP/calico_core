@@ -10,6 +10,8 @@ import Government from './pages/government';
 import Staffapp from './pages/applications/staff';
 import Developerapp from './pages/applications/developer';
 import Testapp from './pages/applications/tester';
+import Buisnessinfo from './pages/Buisnessinfo';
+import PropertyInfo from './pages/Propertyinfo';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/pages/applications/staff" element={<Staffapp />} />
         <Route path="/pages/applications/developer" element={<Developerapp />} />
         <Route path="/pages/applications/tester" element={<Testapp />} />
+        <Route path="/buisnessinfo/:id" element={<Buisnessinfo />} />
+        <Route path="/propertyinfo/:id" element={<PropertyInfo />} />
       </Routes>
     </Router>
   )
