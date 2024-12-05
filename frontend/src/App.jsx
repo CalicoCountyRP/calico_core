@@ -12,23 +12,81 @@ import Developerapp from './pages/applications/developer';
 import Testapp from './pages/applications/tester';
 import Buisnessinfo from './pages/Buisnessinfo';
 import PropertyInfo from './pages/Propertyinfo';
+import PrivateRoute from './components/AuthCheck';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/pages/dashboard" element={<Dashboard />} />
-        <Route path="/pages/businesses" element={<Businesses />} />
-        <Route path="/pages/properties" element={<Properties />} />
-        <Route path="/pages/stable" element={<Stable />} />
-        <Route path="/pages/character" element={<Character />} />
-        <Route path="/pages/government" element={<Government />} />
-        <Route path="/pages/applications/staff" element={<Staffapp />} />
-        <Route path="/pages/applications/developer" element={<Developerapp />} />
-        <Route path="/pages/applications/tester" element={<Testapp />} />
-        <Route path="/buisnessinfo/:id" element={<Buisnessinfo />} />
-        <Route path="/propertyinfo/:id" element={<PropertyInfo />} />
+        <Route path="/pages/dashboard" 
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/pages/businesses" 
+          element={
+            <PrivateRoute>
+              <Businesses />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/pages/properties" 
+          element={
+            <PrivateRoute>
+              <Properties />
+            </PrivateRoute>
+          } />
+        <Route path="/pages/stable" 
+          element={
+            <PrivateRoute>
+              <Stable />
+            </PrivateRoute>
+          } />
+        <Route path="/pages/character" 
+          element={
+            <PrivateRoute>
+              <Character />
+            </PrivateRoute>
+          } />
+        <Route path="/pages/government" 
+          element={
+            <PrivateRoute>
+              <Government />
+            </PrivateRoute>
+          } />
+        <Route path="/pages/applications/staff" 
+          element={
+            <PrivateRoute>
+              <Staffapp />
+            </PrivateRoute>
+          } />
+        <Route path="/pages/applications/developer" 
+          element={
+            <PrivateRoute>
+              <Developerapp />
+            </PrivateRoute>
+          } />
+        <Route path="/pages/applications/tester" 
+          element={
+            <PrivateRoute>
+              <Testapp />
+            </PrivateRoute>
+          } />
+        <Route path="/buisnessinfo/:id" 
+          element={
+            <PrivateRoute>
+              <Buisnessinfo />
+            </PrivateRoute>
+          } />
+        <Route path="/propertyinfo/:id" 
+          element={
+            <PrivateRoute>
+              <PropertyInfo />
+            </PrivateRoute>
+          } />
       </Routes>
     </Router>
   )

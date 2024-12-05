@@ -19,7 +19,6 @@ const Businesses = () => {
             </div>
             <div className='test'>
                 <h1>Businesses</h1>
-                <h1>{info}</h1>
                 <BuisnessGrid />
             </div>
         </div>
