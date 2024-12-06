@@ -78,6 +78,14 @@ app.get('/auth/discord/callback', async (req, res) => {
     }
 })
 
+app.get('/getIdentifiers/:id', async (req, res) => {
+    const { id } = req.params
+    if (!id) {
+        console.log("Id is missing")
+    }
+
+})
+
 app.get('/logout', async (req, res) => {
     res.redirect(process.env.urlbase);
 })
