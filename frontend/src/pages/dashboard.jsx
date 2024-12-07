@@ -14,6 +14,9 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
+  const [userIP, setUserIP] = useState('');
+  const [fivemID, setFivemID] = useState('');
+  const [identifier, setIdentifier] = useState('');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -21,38 +24,59 @@ function Dashboard() {
 
     const fetchData = async () => {
       try {
-          setIsLoading(true);
+        setIsLoading(true);
 
-          console.log(user.id)
-          const response = await fetch(`http://localhost:8081/getsteam/${user.id}`);
-          if (!response.ok) {
-              throw new Error("Failed to fetch data");
-          }
-          const steamID = await response.json();
+        console.log(user.id)
+        const response = await fetch(`http://localhost:8081/getIdentifiers/${user.id}`);
+        if (!response.ok) {
+            throw new Error("Failed to fetch identifiers");
+        }
+        const result = await response.json();
 
-          console.log(steamID[0].identifier);
-          localStorage.setItem('steamID', steamID[0].identifier)
-          setSteamID(steamID[0].identifier)
+        setData(result);
+
+        const identifiers = result.map((identifier) => ({
+          discord_id: identifier.discord_id,
+          identifier: identifier.identifier,
+          ip: identifier.ip,
+          steam_name: identifier.steam_name,
+          steamid: identifier.steamid,
+          fivemid: identifier.fivemid,
+      }));
+
+        if (!identifiers.length) {
+          console.log("No identifiers found")
+          return;
+        }
+
+        const filteredIdentifiers = identifiers[0];
+
+        setdiscordUsername(user.username)
+        setDiscordID(filteredIdentifiers.discord_id)
+        setDiscordGlobalName(user.global)
+        setSteamID(filteredIdentifiers.steamid)
+        setUserIP(filteredIdentifiers.ip)
+        setFivemID(filteredIdentifiers.fivemid)
+        setIdentifier(filteredIdentifiers.identifier)
+        localStorage.setItem('discordID', discordID)
+        localStorage.setItem('steam64', steamID)
 
       } catch (err) {
           setError(err.message);
           console.error("Error fetching data:", err);
       } finally {
           setIsLoading(false);
+          
       }
-  };
+    };
 
   if (user) {
     console.log('Logged in user:', user.username, user.id, user);
-    setdiscordUsername(user.username)
-    setDiscordID(user.id)
-    setDiscordGlobalName(user.global)
-    localStorage.setItem('discordID', user.id)
-    localStorage.setItem('discordUsername', user.global)
     fetchData();
   }
 
   }, []);
+
 
   return(
     <div className="content">
