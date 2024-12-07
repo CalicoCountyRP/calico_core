@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { React, useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/home';
 import Dashboard from './pages/dashboard'
 import Businesses from './pages/businesses'
@@ -12,7 +12,30 @@ import Developerapp from './pages/applications/developer';
 import Testapp from './pages/applications/tester';
 import Buisnessinfo from './pages/Buisnessinfo';
 import PropertyInfo from './pages/Propertyinfo';
-import PrivateRoute from './components/AuthCheck';
+
+const PrivateRoute = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('http://localhost:8081/auth/check', { credentials: 'include' });
+        if (response.ok) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkAuth();
+  }, []);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  return isAuthenticated ? children : <Navigate to="/" />;
+};
 
 function App() {
   return (

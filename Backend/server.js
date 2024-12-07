@@ -2,9 +2,11 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 require('dotenv').config()
+const cookieParser = require('cookie-parser');
 
 const app = express()
-app.use(cors())
+app.use(cors({ origin: process.env.urlbase, credentials: true }))
+app.use(cookieParser())
 
 const db = mysql.createConnection({
     host: process.env.host,
@@ -69,6 +71,7 @@ app.get('/auth/discord/callback', async (req, res) => {
         const user = { username: userData.username, id: userData.id, global: userData.global_name }; // Replace with actual user info
         const redirectURL = process.env.clientredirect
 
+        res.cookie('auth', JSON.stringify(user), { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
         res.redirect(`${redirectURL}/pages/dashboard?user=${encodeURIComponent(JSON.stringify(user))}`);
 
@@ -78,16 +81,31 @@ app.get('/auth/discord/callback', async (req, res) => {
     }
 })
 
+app.get('/auth/check', (req, res) => {
+    const user = req.cookies.auth;
+    if (user) {
+        res.json({ authenticated: true });
+    } else {
+        res.status(401).json({ authenticated: false });
+    }
+})
+
+app.get('/logout', async (req, res) => {
+    res.clearCookie('auth');
+    res.redirect(process.env.urlbase);
+})
+
 app.get('/getIdentifiers/:id', async (req, res) => {
     const { id } = req.params
     if (!id) {
         console.log("Id is missing")
     }
+    const identifierquery = `SELECT identifier, discord_id, ip, steam_name, steamid, fivemid from player_info WHERE discord_id = ?`;
+    db.query(identifierquery, [id], (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
 
-})
-
-app.get('/logout', async (req, res) => {
-    res.redirect(process.env.urlbase);
 })
 
 app.get('/char/:id', async (req, charres) => {
