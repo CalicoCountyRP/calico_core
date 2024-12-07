@@ -58,8 +58,8 @@ function Dashboard() {
         setUserIP(filteredIdentifiers.ip)
         setFivemID(filteredIdentifiers.fivemid)
         setIdentifier(filteredIdentifiers.identifier)
-        localStorage.setItem('discordID', discordID)
-        localStorage.setItem('steam64', steamID)
+        localStorage.setItem('discordID', filteredIdentifiers.discord_id)
+        localStorage.setItem('steam64', filteredIdentifiers.steamid)
 
       } catch (err) {
           setError(err.message);
