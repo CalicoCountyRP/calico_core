@@ -10,7 +10,6 @@ function Dashboard() {
   const [discordID, setDiscordID] = useState("");
   const [discordGlobalName, setDiscordGlobalName] = useState("");
   const [steamID, setSteamID] = useState("");
-  const discordUsernameGlobal = localStorage.getItem('discordUsername')
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
@@ -85,10 +84,10 @@ function Dashboard() {
       </div>
       <SidebarNav />
       <div className="test">
-        <h1>Welcome Back, {discordUsernameGlobal}!</h1>
+        <h1>Welcome Back, {discordGlobalName}!</h1>
         <br />
         <DashboardButtons />
-        <AccountInfo steamID={steamID} username={ discordUsernameGlobal } />
+        <AccountInfo steamID={steamID} username={ discordGlobalName } fivemID={ fivemID } ip={ userIP } identifier={ identifier } discordid={ discordID } />
       </div>
     </div>
   )

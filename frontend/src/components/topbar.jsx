@@ -4,6 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import logo from '../assets/cclogo.png';
 
 const handleLogout = () => {
     localStorage.clear();
@@ -16,7 +17,8 @@ const TopBar = () => {
     return (
         <AppBar position="static" sx={{ backgroundColor: '#333' }}>
             <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+                    <img src={logo} alt="Calico County Logo" style={{ width: '40px', height: '40px' }} />
                     Calico County Core
                 </Typography>
                 <Stack direction="row" spacing={2}>

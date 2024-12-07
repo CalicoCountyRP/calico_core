@@ -13,9 +13,11 @@ import Testapp from './pages/applications/tester';
 import Buisnessinfo from './pages/Buisnessinfo';
 import PropertyInfo from './pages/Propertyinfo';
 
-const PrivateRoute = ({ children }) => {
+const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [alertShown, setAlertShown] = useState(false);
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -31,10 +33,22 @@ const PrivateRoute = ({ children }) => {
     };
     checkAuth();
   }, []);
+
+  if (!alertShown && !isAuthenticated && !loading) {
+    alert('You are not authorized to view this page. Please login and try again.');
+    setAlertShown(true);
+  }
+
   if (loading) {
     return <div>Loading...</div>;
   }
-  return isAuthenticated ? children : <Navigate to="/" />;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
+  /*return isAuthenticated ? children : <Navigate to="/" />;*/
 };
 
 function App() {
@@ -44,71 +58,71 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/pages/dashboard" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Dashboard />
-            </PrivateRoute>
+            </ProtectedRoute>
           }
         />
         <Route path="/pages/businesses" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Businesses />
-            </PrivateRoute>
+            </ProtectedRoute>
           }
         />
         <Route path="/pages/properties" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Properties />
-            </PrivateRoute>
+            </ProtectedRoute>
           } />
         <Route path="/pages/stable" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Stable />
-            </PrivateRoute>
+            </ProtectedRoute>
           } />
         <Route path="/pages/character" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Character />
-            </PrivateRoute>
+            </ProtectedRoute>
           } />
         <Route path="/pages/government" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Government />
-            </PrivateRoute>
+            </ProtectedRoute>
           } />
         <Route path="/pages/applications/staff" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Staffapp />
-            </PrivateRoute>
+            </ProtectedRoute>
           } />
         <Route path="/pages/applications/developer" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Developerapp />
-            </PrivateRoute>
+            </ProtectedRoute>
           } />
         <Route path="/pages/applications/tester" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Testapp />
-            </PrivateRoute>
+            </ProtectedRoute>
           } />
         <Route path="/buisnessinfo/:id" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <Buisnessinfo />
-            </PrivateRoute>
+            </ProtectedRoute>
           } />
         <Route path="/propertyinfo/:id" 
           element={
-            <PrivateRoute>
+            <ProtectedRoute>
               <PropertyInfo />
-            </PrivateRoute>
+            </ProtectedRoute>
           } />
       </Routes>
     </Router>
