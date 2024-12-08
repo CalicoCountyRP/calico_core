@@ -8,9 +8,15 @@ function Horses({ steamID }) {
 
     useEffect(() => {
         const fetchData = async () => {
+            if (!steamID) {
+                console.error("SteamID not provided");
+                return;
+            }
+            
             try {
                 setIsLoading(true);
                 const response = await fetch(`http://localhost:8081/getHorses/${steamID}`);
+                console.log(response);
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
                 }
@@ -25,6 +31,7 @@ function Horses({ steamID }) {
                 setIsLoading(false);
             }
         };
+
         fetchData();
     }, [steamID]);
 
