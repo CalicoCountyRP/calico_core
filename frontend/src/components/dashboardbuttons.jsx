@@ -1,5 +1,8 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import { FaDiscord, FaArrowCircleRight } from 'react-icons/fa';
+import { FaBookBookmark } from "react-icons/fa6";
+import Typography from '@mui/material/Typography';
 import '../App.css'; // Make sure to import the CSS file
 
 const DashboardButtons = () => {
@@ -10,24 +13,30 @@ const DashboardButtons = () => {
                 href="https://rules.calicocountyrp.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="dashboard-button"
             >
-                Rules
+                <FaBookBookmark className="dashboard-button-icon" />
+                <span className="dashboard-button-text">Rules</span>
             </Button>
             <Button
                 variant="contained"
                 href="redm://connect/play.calicocountyrp.com:30140"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="dashboard-button"
             >
-                Connect
+                <FaArrowCircleRight className="dashboard-button-icon" />
+                <span className="dashboard-button-text">Connect</span>
             </Button>
             <Button
                 variant="contained"
                 href="https://discord.gg/ryRfCvnyuJ"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="dashboard-button"
             >
-                Discord
+                <FaDiscord className="dashboard-button-icon" />
+                <span className="dashboard-button-text">Discord</span>
             </Button>
         </div>
     );

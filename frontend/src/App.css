@@ -74,11 +74,38 @@ body {
 }
 
 .dashboard-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+    display: flex;
+    flex-direction: row; /* Align buttons horizontally */
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Add space between the buttons */
+}
+
+.dashboard-button-container {
+    display: flex;
+    flex-direction: column; /* Stack button and text vertically */
+    align-items: center;
+}
+
+.dashboard-button {
+    display: flex;
+    flex-direction: column; /* Stack icon above text */
+    align-items: center;
+    justify-content: center; /* Center content within the button */
+    width: 100px; /* Fixed width */
+    height: 100px; /* Fixed height */
+    text-transform: none;
+    padding: 15px; /* Adjust padding accordingly */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.dashboard-button-icon {
+    font-size: 2rem; /* Adjust the size as needed */
+    margin-bottom: 8px; /* Adjust margin accordingly */
+}
+
+.dashboard-button-text {
+    font-size: 0.75rem; /* Adjust the size as needed */
+    margin-top: 8px; /* Add margin to separate text from button */
 }
 
 .home-container {
