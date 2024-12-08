@@ -10,7 +10,7 @@ const Businesses = () => {
     const info = location.state;
 
     return (
-        <div className="content">
+        <div className="businessgrid">
             <div className="topNav">
                 <TopBar />
             </div>
@@ -18,8 +18,10 @@ const Businesses = () => {
                 <SidebarNav />
             </div>
             <div className='test'>
-                <h1>Businesses</h1>
-                <BuisnessGrid />
+                <h1>Real Estate Office: Businesses</h1>
+                <div clasName="buisness-grid-contaner">
+                    <BuisnessGrid />
+                </div>
             </div>
         </div>
     );

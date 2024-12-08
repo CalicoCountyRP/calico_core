@@ -152,3 +152,16 @@ body {
   margin-left: 250px;
   padding: 20px;
 }
+
+.businessgrid {
+  margin-top: 40px;
+  margin-left: 250px;
+  padding: 20px;
+}
+
+.business-grid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
