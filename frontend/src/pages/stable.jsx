@@ -7,7 +7,7 @@ const Stable = () => {
     const [steamID, setSteamID] = useState("");
 
     useEffect(() => {
-        const storedSteamID = localStorage.getItem('steamID');
+        const storedSteamID = localStorage.getItem('steam64');
         if (!storedSteamID) {
             console.log('SteamID not found in local storage');
             return
@@ -23,7 +23,6 @@ const Stable = () => {
             <SidebarNav />
             <h1>Welcome to the Stable Component</h1>
             <p>This is a placeholder for the stable component content.</p>  
-            <p>{steamID}</p>
             <Horses steamID={steamID}/>
         </div>
     );
