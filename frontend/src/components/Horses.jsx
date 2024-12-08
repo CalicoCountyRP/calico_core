@@ -12,17 +12,16 @@ function Horses({ steamID }) {
                 console.error("SteamID not provided");
                 return;
             }
-            
+
             try {
                 setIsLoading(true);
                 const response = await fetch(`http://localhost:8081/getHorses/${steamID}`);
-                console.log(response);
+
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
                 }
                 const result = await response.json();
                 setData(result);
-                console.log(result);
 
             } catch (err) {
                 setError(err.message);
@@ -34,11 +33,6 @@ function Horses({ steamID }) {
 
         fetchData();
     }, [steamID]);
-
-    const handleButtonClick = (id) => {
-        // Define what happens when the button is clicked (e.g., log the ID)
-        console.log(`Button clicked for character with ID: ${id}`);
-    };
 
     if (isLoading) {
         return <Typography>Loading...</Typography>;
@@ -53,12 +47,6 @@ function Horses({ steamID }) {
             {data.map((item) => (
                 <Grid2 item xs={12} sm={6} md={4} lg={3} key={item.id}>
                     <Card sx={{ width: 300, height: 400 }}> {/* Set the desired width and height */}
-                        <CardMedia
-                            component="img"
-                            height="140"
-                            image={item.imageUrl}
-                            alt={item.name}
-                        />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
                                 {item.name}
@@ -67,9 +55,6 @@ function Horses({ steamID }) {
                                 {item.description}
                             </Typography>
                         </CardContent>
-                        <CardActions>
-                            <Button size="small" onClick={() => handleButtonClick(item.id)}>Learn More</Button>
-                        </CardActions>
                     </Card>
                 </Grid2>
             ))}
