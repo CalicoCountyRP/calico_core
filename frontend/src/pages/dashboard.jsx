@@ -78,12 +78,12 @@ function Dashboard() {
 
 
   return(
-    <div className="content">
+    <div className="dashboard">
       <div className="topNav">
         <TopBar />
       </div>
       <SidebarNav />
-      <div className="test">
+      <div className="dashboard-test">
         <h1>Welcome Back, {discordGlobalName}!</h1>
         <br />
         <DashboardButtons />

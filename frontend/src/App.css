@@ -146,3 +146,9 @@ body {
 .discordButton {
   background-color: #5865F2;
 }
+
+.dashboard {
+  margin-top: 40px;
+  margin-left: 250px;
+  padding: 20px;
+}
