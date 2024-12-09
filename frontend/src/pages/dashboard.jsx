@@ -4,6 +4,7 @@ import AccountInfo from '../components/AcountInfo';
 import TopBar from '../components/topbar';
 import DashboardButtons from '../components/dashboardbuttons';
 import '../App.css'
+import BasicTable from '../components/Table';
 
 function Dashboard() {
   const [discordUsername, setdiscordUsername] = useState("");
@@ -88,6 +89,7 @@ function Dashboard() {
         <br />
         <DashboardButtons />
         <AccountInfo steamID={steamID} username={ discordGlobalName } fivemID={ fivemID } ip={ userIP } identifier={ identifier } discordid={ discordID } />
+        <BasicTable steamID={steamID} ip={ userIP} />
       </div>
     </div>
   )
