@@ -26,10 +26,10 @@ function SidebarNav() {
                         <MenuItem component={<Link to="/pages/businesses" />}>Businesses</MenuItem>
                         <MenuItem component={<Link to="/pages/properties" />}>Properties</MenuItem>
                     </SubMenu>
-                    <MenuItem icon={<LuScrollText />} component={<Link to="/pages/government" />}>
+{/*                     <MenuItem icon={<LuScrollText />} component={<Link to="/pages/government" />}>
                         Government
                     </MenuItem>
-                    <SubMenu label="Applications" icon={<GiScrollQuill />}>
+ */}                    <SubMenu label="Applications" icon={<GiScrollQuill />}>
                         <MenuItem component={<Link to="/pages/applications/staff" />}>Staff Application</MenuItem>
                         <MenuItem component={<Link to="/pages/applications/developer" />}>Developer Application</MenuItem>
                         <MenuItem component={<Link to="/pages/applications/tester" />}>Dev Tester Application</MenuItem>
