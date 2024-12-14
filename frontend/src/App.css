@@ -3,6 +3,9 @@
 body {
   margin: 0;
   padding: 0;
+  background-size: cover;
+  background-position: center;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 6%, rgba(0,0,0,0.5) 18%, rgba(0,0,0,0.90) 37%), url('/background.png');
 }
 
 .text-2xl {
@@ -78,6 +81,7 @@ body {
     flex-direction: row; /* Align buttons horizontally */
     justify-content: center; /* Center the buttons horizontally */
     gap: 20px; /* Add space between the buttons */
+    background-color: rgba(0,0,0,0);
 }
 
 .dashboard-button-container {
@@ -164,4 +168,8 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.accountInfo {
+  padding-top: 90px;
 }
