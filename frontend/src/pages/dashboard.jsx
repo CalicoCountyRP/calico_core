@@ -26,7 +26,6 @@ function Dashboard() {
       try {
         setIsLoading(true);
 
-        console.log(user.id)
         const response = await fetch(`http://localhost:8081/getIdentifiers/${user.id}`);
         if (!response.ok) {
             throw new Error("Failed to fetch identifiers");
@@ -71,7 +70,6 @@ function Dashboard() {
     };
 
   if (user) {
-    console.log('Logged in user:', user.username, user.id, user);
     fetchData();
   }
 
@@ -88,8 +86,11 @@ function Dashboard() {
         <h1>Welcome Back, {discordGlobalName}!</h1>
         <br />
         <DashboardButtons />
-        <AccountInfo steamID={steamID} username={ discordGlobalName } fivemID={ fivemID } ip={ userIP } identifier={ identifier } discordid={ discordID } />
-        <BasicTable steamID={steamID} ip={ userIP} />
+        <div className = "accountInfo">
+          <AccountInfo steamID={steamID} username={ discordGlobalName } fivemID={ fivemID } ip={ userIP } identifier={ identifier } discordid={ discordID } />
+        </div>
+        <h2>Last 5 Logins</h2>
+        <BasicTable discordID={ discordID } />
       </div>
     </div>
   )
