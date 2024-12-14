@@ -80,6 +80,9 @@ function BuisnessGrid( {businessData} ) {
                             <Typography variant="body2" color="text.secondary">
                                 Location: Great Plains
                             </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Price: $
+                            </Typography>
                         </CardContent>
 {/*                         <CardActions sx={{ justifyContent: 'center' }}>
                             <Button
