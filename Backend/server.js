@@ -120,6 +120,18 @@ app.get('/char/:id', async (req, charres) => {
     })
 })
 
+app.get('/getlogins/:id', async (req, res) => {
+    const { id } = req.params
+    if (!id) {
+        console.log("Id is missing")
+    }
+    const steamquery = `SELECT * from player_info WHERE discord_id = ?`;
+    db.query(steamquery, [id], (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
 app.get('/getsteam/:id', async (req, res) => {
     const { id } = req.params
     if (!id) {
