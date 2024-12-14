@@ -60,7 +60,7 @@ function BuisnessGrid( {businessData} ) {
     }
 
     return (
-        <Grid2 container spacing={2}>
+        <Grid2 container spacing={2} justifyContent="center" alignItems="center" sx={{ marginTop: 4 }}>
             {data.map((item) => (
                 <Grid2 item xs={12} sm={6} md={4} lg={3} key={item.id}>
                     <Card sx={{ width: 300, height: 400 }}> {/* Set the desired width and height */}
@@ -81,7 +81,7 @@ function BuisnessGrid( {businessData} ) {
                                 Location: Great Plains
                             </Typography>
                         </CardContent>
-                        <CardActions sx={{ justifyContent: 'center' }}>
+{/*                         <CardActions sx={{ justifyContent: 'center' }}>
                             <Button
                                 size="small"
                                 onClick={() => handleButtonClick(item.id, item.name, item.image)}
@@ -98,7 +98,7 @@ function BuisnessGrid( {businessData} ) {
                             >
                                 View Business
                             </Button>
-                        </CardActions>
+                        </CardActions> */}
                     </Card>
                 </Grid2>
             ))}

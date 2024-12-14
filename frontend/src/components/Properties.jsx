@@ -56,7 +56,7 @@ function BuisnessGrid() {
     }
 
     return (
-        <Grid2 container spacing={2}>
+        <Grid2 container spacing={2} justifyContent="center" alignItems="center" sx={{ marginTop: 10 }}>
             {data.map((item) => (
                 <Grid2 item xs={12} sm={6} md={4} lg={3} key={item.id}>
                     <Card sx={{ width: 300, height: 400 }}> {/* Set the desired width and height */}

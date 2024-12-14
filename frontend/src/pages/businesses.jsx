@@ -18,7 +18,8 @@ const Businesses = () => {
                 <SidebarNav />
             </div>
             <div className='test'>
-                <h1>Real Estate Office: Businesses</h1>
+                <h1 style={{ textAlign: 'center', color: 'white', fontSize: '60px', marginBottom: '0px' }}>Businesses</h1>
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '20px', marginTop: '0px' }}>Real Estate Office</p>
                 <div clasName="buisness-grid-contaner">
                     <BuisnessGrid />
                 </div>

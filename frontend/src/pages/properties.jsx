@@ -10,7 +10,9 @@ const Properties = () => {
                 <TopBar />
             </div>
             <SidebarNav />
-            <h1>Properties</h1>
+            <h1 style={{ textAlign: 'center', color: 'white', fontSize: '60px', marginBottom: '0px' }}>Properties</h1>
+            <p style={{ textAlign: 'center', color: 'white', fontSize: '20px', marginTop: '0px' }}>Real Estate Office</p>
+
             <PropertyGrid />
         </div>
     );
