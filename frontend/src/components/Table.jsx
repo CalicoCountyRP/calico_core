@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { Typography } from '@mui/material';
+
 
 const columns = [
     { field: 'ip', headerName: 'IP', width: 150 },
@@ -46,6 +48,9 @@ export default function Table({ discordID }) {
 
     return (
         <div style={{ height: 400, width: 550 }}>
+            <Typography variant="h5" component="h2" style={{ color: 'white', marginBottom: '10px' }}>
+                Last 5 Logins
+            </Typography>
             <DataGrid 
                 rows={rows} 
                 columns={columns}
