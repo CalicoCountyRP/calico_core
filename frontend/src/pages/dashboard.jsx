@@ -73,9 +73,9 @@ function Dashboard() {
       }
     };
 
-  if (user) {
-    fetchData();
-  }
+    if (user) {
+      fetchData();
+    }
 
   }, []);
 
@@ -102,7 +102,7 @@ function Dashboard() {
             />
           </div>
           <div className = "connectionTable">
-            <h2>Last 5 Logins</h2>
+            <h2 style={{color: "white"}}>Last 5 Logins</h2>
             <BasicTable discordID={ storedData.find(item => item.discordID)?.discordID || discordID } />
           </div>
         </div>
