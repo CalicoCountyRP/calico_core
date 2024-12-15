@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { FaDiscord, FaArrowCircleRight } from 'react-icons/fa';
 import { FaBookBookmark } from "react-icons/fa6";
-import Typography from '@mui/material/Typography';
 import '../App.css'; // Make sure to import the CSS file
 
 const DashboardButtons = () => {
