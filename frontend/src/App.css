@@ -191,3 +191,10 @@ body {
   gap: 20px;
   width: 100%;
 }
+
+.accountInfo {
+  display: felx;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
