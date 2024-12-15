@@ -60,6 +60,10 @@ function Dashboard() {
         localStorage.setItem('discordID', filteredIdentifiers.discord_id)
         localStorage.setItem('steam64', filteredIdentifiers.steamid)
 
+        const idArray = [{ discordUsername: user.username, discordID: filteredIdentifiers.discord_id, discordGlobalName: user.global, steamID: filteredIdentifiers.steamid, userIP: filteredIdentifiers.ip, fivemID: filteredIdentifiers.fivemid, identifier: filteredIdentifiers.identifier }];
+
+        localStorage.setItem('data', JSON.stringify(idArray));
+
       } catch (err) {
           setError(err.message);
           console.error("Error fetching data:", err);
@@ -75,6 +79,7 @@ function Dashboard() {
 
   }, []);
 
+  const storedData = JSON.parse(localStorage.getItem('data')) || [];
 
   return(
     <div className="dashboard">
@@ -87,11 +92,18 @@ function Dashboard() {
         <DashboardButtons />
         <div className = "accountInfo-content">
           <div className = "accountInfo">
-            <AccountInfo steamID={steamID} username={ discordGlobalName } fivemID={ fivemID } ip={ userIP } identifier={ identifier } discordid={ discordID } />
+            <AccountInfo 
+              steamID={storedData.find(item => item.steamID)?.steamID || steamID} 
+              username={storedData.find(item => item.discordGlobalName)?.discordGlobalName || discordGlobalName} 
+              fivemID={storedData.find(item => item.fivemID)?.fivemID || fivemID} 
+              ip={storedData.find(item => item.userIP)?.userIP || userIP} 
+              identifier={storedData.find(item => item.identifier)?.identifier || identifier} 
+              discordid={storedData.find(item => item.discordID)?.discordID || discordID} 
+            />
           </div>
           <div className = "connectionTable">
             <h2>Last 5 Logins</h2>
-            <BasicTable discordID={ discordID } />
+            <BasicTable discordID={ storedData.find(item => item.discordID)?.discordID || discordID } />
           </div>
         </div>
       </div>
