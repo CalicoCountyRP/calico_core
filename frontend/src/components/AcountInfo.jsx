@@ -3,12 +3,11 @@ import { Grid2, Card, CardContent, Typography, CardMedia } from '@mui/material';
 
 function AccountInfo({steamID, username, fivemID, ip, identifier, discordid}) {
     return (
-      <div>
-          <div>
+        <div>
+            <Typography variant="h5" component="h2" style={{ color: 'white', marginBottom: '-5px', paddingLeft: '15px'}}> Identifiers </Typography>
             <Grid2 container spacing={4} padding={2}>
                 <Card>
                     <CardContent>
-                        <Typography variant="h5" component="div"> Identifiers </Typography>
                         <Typography variant="body2" color="text.secondary"> Discord User: { username }  </Typography>
                         <Typography variant="body2" color="text.secondary"> Discord ID: { discordid } </Typography>
                         <Typography variant="body2" color="text.secondary"> Steam64: { steamID } </Typography>
@@ -18,8 +17,7 @@ function AccountInfo({steamID, username, fivemID, ip, identifier, discordid}) {
                     </CardContent>
                 </Card>
             </Grid2>
-          </div>
-      </div>
+        </div>
     );
 };
 
