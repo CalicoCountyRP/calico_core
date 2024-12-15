@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, Typography, CardMedia } from '@mui/material';
 
-function SkillsCardGrid() {
+function CharacterGrid() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -44,7 +44,7 @@ function SkillsCardGrid() {
     }
 
     return (
-        <Grid2 container spacing={4} padding={2}>
+        <Grid2 container spacing={4} padding={2} justifyContent="center" alignItems="center" sx={{ marginTop: 4 }}>
           {data.map((card) => (
             <Grid2 item xs={12} sm={6} md={4} lg={3} key={card.id}>
               <Card>
@@ -65,4 +65,4 @@ function SkillsCardGrid() {
     )
 }
 
-export default SkillsCardGrid;
+export default CharacterGrid;

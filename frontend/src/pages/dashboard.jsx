@@ -82,15 +82,18 @@ function Dashboard() {
         <TopBar />
       </div>
       <SidebarNav />
-      <div className="dashboard-test">
-        <h1>Welcome Back, {discordGlobalName}!</h1>
-        <br />
+      <div className="dashboard-content">
+        <h1 style={{ textAlign: 'center', color: 'white', fontSize: '60px', marginBottom: '25px' }}>Welcome! </h1>
         <DashboardButtons />
-        <div className = "accountInfo">
-          <AccountInfo steamID={steamID} username={ discordGlobalName } fivemID={ fivemID } ip={ userIP } identifier={ identifier } discordid={ discordID } />
+        <div className = "accountInfo-content">
+          <div className = "accountInfo">
+            <AccountInfo steamID={steamID} username={ discordGlobalName } fivemID={ fivemID } ip={ userIP } identifier={ identifier } discordid={ discordID } />
+          </div>
+          <div className = "connectionTable">
+            <h2>Last 5 Logins</h2>
+            <BasicTable discordID={ discordID } />
+          </div>
         </div>
-        <h2>Last 5 Logins</h2>
-        <BasicTable discordID={ discordID } />
       </div>
     </div>
   )

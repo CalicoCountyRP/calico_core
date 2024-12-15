@@ -1,5 +1,5 @@
 import React from 'react';
-import SkillsCardGrid from '../components/Skills';
+import CharacterGrid from '../components/Skills';
 import SidebarNav from '../components/Sidebar';
 import TopBar from '../components/topbar';
 import '../App.css';
@@ -15,8 +15,9 @@ const Character = () => {
                 <SidebarNav />
             </div>
             <div className='test'>
-                <h1>Characters</h1>
-                <SkillsCardGrid />
+                <h1 style={{ textAlign: 'center', color: 'white', fontSize: '60px', marginBottom: '0px' }}>Characters</h1>
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '20px', marginTop: '0px' }}>An overview of all your characters</p>
+                <CharacterGrid />
                 <br />
                 {/* <OwnedProperties /> */}
             </div>

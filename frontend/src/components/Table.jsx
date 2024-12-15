@@ -45,7 +45,7 @@ export default function Table({ discordID }) {
 
 
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 400, width: 550 }}>
             <DataGrid rows={rows} columns={columns} pageSize={5} />
         </div>
     );
