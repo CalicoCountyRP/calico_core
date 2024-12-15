@@ -48,17 +48,15 @@ export default function Table({ discordID }) {
         <div style={{ height: 400, width: 550 }}>
             <DataGrid 
                 rows={rows} 
-                columns={columns} 
-                pageSize={5} 
+                columns={columns}
+                hideFooterPagination
+                hideFooter
                 sx={{
                     '& .MuiDataGrid-cell': {
                         color: 'white', // Set text color to white
                     },
                     '& .MuiDataGrid-columnHeaders': {
                         color: 'black', // Set header text color to black
-                    },
-                    '& .MuiDataGrid-footerContainer': {
-                        color: 'white', // Set footer text color to white
                     },
                 }}
             />
