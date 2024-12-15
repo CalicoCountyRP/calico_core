@@ -68,8 +68,8 @@ body {
 .topNav {
   width: 100%;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; /*These do actually need to be here, to pin them on top*/
+  left: 0; /*These do actually need to be here, to pin them on top*/
   z-index: 1000;
 }
 
@@ -167,6 +167,9 @@ body {
   margin-top: 40px;
   margin-left: 250px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .businessgrid {
@@ -179,5 +182,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+.accountInfo-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   width: 100%;
 }
