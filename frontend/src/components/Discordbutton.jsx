@@ -8,7 +8,7 @@ function DiscordButton() {
             <Button
                 className="discordButton"
                 variant="contained"
-                href='http://localhost:8081/auth/discord/login'
+                href={`${import.meta.env.VITE_REACT_API_URL}/auth/discord/login`}
                 startIcon={<FaDiscord />}
             >
                 Login With Discord

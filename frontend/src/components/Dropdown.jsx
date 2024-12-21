@@ -17,7 +17,7 @@ function DropdownMenu({ discordID }) {
         }
         setIsLoading(true);
         console.log(`Fetching data for discordID: ${discordID}`)
-        const response = await fetch(`http://localhost:8081/char/${discordID}`);
+        const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/char/${discordID}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

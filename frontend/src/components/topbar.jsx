@@ -26,7 +26,7 @@ const TopBar = () => {
                     <Button 
                         color="inherit" 
                         onClick={handleLogout} 
-                        href='http://localhost:8081/logout'
+                        href={`${import.meta.env.AppBar}/logout`}
                         startIcon={<MdLogout />}
                     >
                         Logout

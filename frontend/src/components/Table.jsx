@@ -19,7 +19,7 @@ export default function Table({ discordID }) {
             try {
                 setIsLoading(true);
 
-                const response = await fetch(`http://localhost:8081/getlogins/${discordID}`);
+                const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/getlogins/${discordID}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
                 }

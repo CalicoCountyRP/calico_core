@@ -15,7 +15,7 @@ function BuisnessGrid( {businessData} ) {
             try {
                 setIsLoading(true);
 
-                const response = await fetch(`http://localhost:8081/getBuisnesses`);
+                const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/getBuisnesses`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
                 }

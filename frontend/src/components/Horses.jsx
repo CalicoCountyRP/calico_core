@@ -15,7 +15,7 @@ function Horses({ steamID }) {
 
             try {
                 setIsLoading(true);
-                const response = await fetch(`http://localhost:8081/getHorses/${steamID}`);
+                const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/getHorses/${steamID}`);
 
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");

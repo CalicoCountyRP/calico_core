@@ -26,7 +26,7 @@ function Dashboard() {
       try {
         setIsLoading(true);
 
-        const response = await fetch(`http://localhost:8081/getIdentifiers/${user.id}`);
+        const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/getIdentifiers/${user.id}`);
         if (!response.ok) {
             throw new Error("Failed to fetch identifiers");
         }

@@ -12,7 +12,7 @@ const OwnedProperties = () => {
             try {
                 setIsLoading(true);
 
-                const response = await fetch(`http://localhost:8081/ownedproperties`);
+                const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/ownedproperties`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
                 }
