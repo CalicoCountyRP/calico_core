@@ -88,7 +88,7 @@ function Dashboard() {
       </div>
       <SidebarNav />
       <div className="dashboard-content">
-        <h1 style={{ textAlign: 'center', color: 'white', fontSize: '60px', marginBottom: '25px' }}>Welcome! </h1>
+        <h1 style={{ textAlign: 'center', color: 'white', fontSize: '60px', marginBottom: '25px' }}>Welcome {storedData.find(item => item.discordGlobalName)?.discordGlobalName || discordGlobalName}! </h1>
         <DashboardButtons />
         <div className = "accountInfo-content">
           <div className = "accountInfo">

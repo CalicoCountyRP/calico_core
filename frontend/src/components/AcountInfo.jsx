@@ -11,12 +11,12 @@ function AccountInfo({ steamID, username, fivemID, ip, identifier, discordid }) 
                 <Grid item xs={12}>
                     <Card>
                         <CardContent>
-                            <Typography variant="body2" color="text.secondary"> Discord User: {username} </Typography>
-                            <Typography variant="body2" color="text.secondary"> Discord ID: {discordid} </Typography>
-                            <Typography variant="body2" color="text.secondary"> Steam64: {steamID} </Typography>
-                            <Typography variant="body2" color="text.secondary"> FiveM ID: {fivemID} </Typography>
-                            <Typography variant="body2" color="text.secondary"> Last IP: {ip} </Typography>
-                            <Typography variant="body2" color="text.secondary"> Identifier: {identifier} </Typography>
+                            <Typography variant="body2" color="text.secondary"> <b>Discord User:</b> {username} </Typography>
+                            <Typography variant="body2" color="text.secondary"> <b>Discord ID:</b> {discordid} </Typography>
+                            <Typography variant="body2" color="text.secondary"> <b>Steam64:</b> {steamID} </Typography>
+                            <Typography variant="body2" color="text.secondary"> <b>FiveM ID:</b> {fivemID} </Typography>
+                            <Typography variant="body2" color="text.secondary"> <b>Last IP:</b> {ip} </Typography>
+                            <Typography variant="body2" color="text.secondary"> <b>Identifier:</b> {identifier} </Typography>
                         </CardContent>
                     </Card>
                 </Grid>

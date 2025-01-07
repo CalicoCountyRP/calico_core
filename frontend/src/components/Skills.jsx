@@ -48,6 +48,12 @@ function CharacterGrid() {
           {data.map((card) => (
             <Grid2 item xs={12} sm={6} md={4} lg={3} key={card.id}>
               <Card>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={card.image} // Assuming each card object has an 'image' property
+                  alt={`${card.firstname} ${card.lastname}`}
+                />
                 <CardContent>
                   <Typography variant="h5" component="div">{card.firstname} {card.lastname}</Typography>
                   <br />

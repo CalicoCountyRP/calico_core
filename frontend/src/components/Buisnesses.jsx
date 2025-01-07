@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, CardActions, Button, Typography, CardMedia } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import RealEstateModal from './realestatemodal';
 
 function BuisnessGrid( {businessData} ) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [bizData, setBizData] = useState(businessData);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedBusiness, setSelectedBusiness] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,18 +49,18 @@ function BuisnessGrid( {businessData} ) {
 
         console.log(info)
  
-        navigate(`/buisnessinfo/${id}`, { state: info });
+        //navigate(`/buisnessinfo/${id}`, { state: info });
+        setSelectedBusiness(info);
+        setIsModalOpen(true);
 
         console.log(`Button clicked for character with ID: ${id}, ${name}, ${image}`);
     };
 
-    if (isLoading) {
-        return <Typography>Loading...</Typography>;
-    }
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedBusiness(null);
+    };
 
-    if (error) {
-        return <Typography>Error: {error}</Typography>;
-    }
 
     return (
         <Grid2 container spacing={2} justifyContent="center" alignItems="center" sx={{ marginTop: 4 }}>
@@ -84,7 +87,7 @@ function BuisnessGrid( {businessData} ) {
                                 Price: ${item.price}
                             </Typography>
                         </CardContent>
-{/*                         <CardActions sx={{ justifyContent: 'center' }}>
+                        <CardActions sx={{ justifyContent: 'center' }}>
                             <Button
                                 size="small"
                                 onClick={() => handleButtonClick(item.id, item.name, item.image)}
@@ -101,10 +104,15 @@ function BuisnessGrid( {businessData} ) {
                             >
                                 View Business
                             </Button>
-                        </CardActions> */}
+                        </CardActions>
                     </Card>
                 </Grid2>
             ))}
+            <RealEstateModal
+                open={isModalOpen}
+                onClose={handleCloseModal}
+                business={selectedBusiness}
+            /> 
         </Grid2>
     );
 }
