@@ -125,7 +125,7 @@ app.get('/getlogins/:id', async (req, res) => {
     if (!id) {
         console.log("Id is missing")
     }
-    const steamquery = `SELECT * from player_info WHERE discord_id = ?`;
+    const steamquery = `SELECT * from player_info WHERE discord_id = ? ORDER BY date desc LIMIT 5`;
     db.query(steamquery, [id], (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
