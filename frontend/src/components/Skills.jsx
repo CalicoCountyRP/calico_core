@@ -60,7 +60,6 @@ function CharacterGrid() {
                   <Typography variant="body2" color="text.secondary"><b>Database Identifier:</b> {card.charidentifier} </Typography>
                   <Typography variant="body2" color="text.secondary"><b>Last Login:</b> {card.LastLogin}</Typography>
                   <Typography variant="body2" color="text.secondary"><b>Money on Hand:</b> {card.money} </Typography>
-                  <Typography variant="body2" color="text.secondary"><b>Total Money in Bank:</b> </Typography>
                   <Typography variant="body2" color="text.secondary"><b>Job:</b> {card.job} </Typography>
                   <Typography variant="body2" color="text.secondary"><b>Time Played:</b> {card.hours} hrs</Typography>
                 </CardContent>
