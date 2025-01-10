@@ -1,8 +1,31 @@
 import React from 'react';
 import { Modal, Box, Typography, Button } from '@mui/material';
+import mapImage from '../assets/rdr.jpg'; // Import the image
+import '../App.css'; // Import the CSS file
 
 const RealEstateModal = ({ open, onClose, business }) => {
     if (!business) return null;
+
+    // Image dimensions
+    const imageWidth = 7200;
+    const imageHeight = 5400;
+
+    console.log("a", business)
+
+    // Convert business coordinates to percentages
+    const markerStyle = {
+        position: 'absolute',
+        top: `${(business.latitude / imageHeight) * 100}%`, // Convert to percentage
+        left: `${(business.longitude / imageWidth) * 100}%`, // Convert to percentage
+        transform: 'translate(-50%, -50%)',
+        width: '20px',
+        height: '20px',
+        backgroundColor: 'red',
+        borderRadius: '50%',
+    };
+
+    console.log('Latitude:', business.latitude);
+    console.log('Longitude:', business.longitude);
 
     return (
         <Modal open={open} onClose={onClose}>
@@ -11,10 +34,12 @@ const RealEstateModal = ({ open, onClose, business }) => {
                 top: '50%', 
                 left: '50%', 
                 transform: 'translate(-50%, -50%)', 
-                width: 400, 
+                width: 600, 
                 bgcolor: 'background.paper', 
                 boxShadow: 24, 
-                p: 4 
+                p: 4,
+                overflow: 'hidden',
+                position: 'relative',
             }}>
                 <Typography variant="h6" component="h2">
                     {business.name}
@@ -28,6 +53,10 @@ const RealEstateModal = ({ open, onClose, business }) => {
                 <Typography sx={{ mt: 2 }}>
                     Price: ${business.price}
                 </Typography>
+                <div style={{ position: 'relative', width: '100%', height: '300px', marginTop: '20px' }}>
+                    <img src={mapImage} alt="Map" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={markerStyle}></div>
+                </div>
                 <Button onClick={onClose} sx={{ mt: 2 }}>Close</Button>
             </Box>
         </Modal>

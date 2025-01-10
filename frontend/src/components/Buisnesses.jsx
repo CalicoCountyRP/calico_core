@@ -27,8 +27,6 @@ function BuisnessGrid( {businessData} ) {
                 const flattenedData = result.flat();
                 setData(flattenedData);
 
-                console.log(flattenedData);
-
             } catch (err) {
                 setError(err.message);
                 console.error("Error fetching data:", err);
@@ -40,20 +38,19 @@ function BuisnessGrid( {businessData} ) {
         setBizData(businessData);
     }, [businessData]);
 
-    const handleButtonClick = (id, name, image) => {
+    const handleButtonClick = (id, name, image, location, price) => {
         const info = {
             id:id,
             name:name,
-            image:image
+            image:image,
+            location:location,
+            price:price
         }
-
-        console.log(info)
  
         //navigate(`/buisnessinfo/${id}`, { state: info });
         setSelectedBusiness(info);
         setIsModalOpen(true);
 
-        console.log(`Button clicked for character with ID: ${id}, ${name}, ${image}`);
     };
 
     const handleCloseModal = () => {
@@ -87,10 +84,11 @@ function BuisnessGrid( {businessData} ) {
                                 Price: ${item.price}
                             </Typography>
                         </CardContent>
+                        <br />
                         <CardActions sx={{ justifyContent: 'center' }}>
                             <Button
                                 size="small"
-                                onClick={() => handleButtonClick(item.id, item.name, item.image)}
+                                onClick={() => handleButtonClick(item.id, item.name, item.image, item.location, item.price)}
                                 sx={{
                                     backgroundColor: '#1976d2', // Primary color
                                     color: 'white',
@@ -98,7 +96,7 @@ function BuisnessGrid( {businessData} ) {
                                         backgroundColor: '#115293', // Darker shade for hover state
                                     },
                                     borderRadius: '8px', // Rounded corners
-                                    padding: '8px 16px', // Padding
+                                    padding: '9px 16px', // Padding
                                     fontSize: '14px', // Font size
                                 }}
                             >
