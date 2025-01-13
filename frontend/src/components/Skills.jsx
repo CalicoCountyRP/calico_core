@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, Typography, CardMedia } from '@mui/material';
+import userPlaceholder from '../assets/userPlaceholder.png';
 
 function CharacterGrid() {
     const [data, setData] = useState([]);
@@ -50,8 +51,8 @@ function CharacterGrid() {
               <Card>
                 <CardMedia
                   component="img"
-                  height="200"
-                  image={card.image} // Assuming each card object has an 'image' property
+                  height="250"
+                  image={card.pfp || userPlaceholder} // Assuming each card object has an 'image' property
                   alt={`${card.firstname} ${card.lastname}`}
                 />
                 <CardContent>

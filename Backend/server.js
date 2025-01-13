@@ -113,7 +113,7 @@ app.get('/char/:id', async (req, charres) => {
     if (!id) {
         console.log("Id is missing")
     }
-    const charsql = `select identifier, charidentifier, firstname, lastname, job, discordid, money, age, character_desc, nickname, gender, hours, LastLogin from characters WHERE discordid = ?`;
+    const charsql = `select identifier, charidentifier, firstname, lastname, job, discordid, money, age, character_desc, nickname, gender, hours, LastLogin, pfp from characters WHERE discordid = ?`;
     db.query(charsql, [id], (err, data) => {
         if(err) return charres.json(err);
         return charres.json(data);
