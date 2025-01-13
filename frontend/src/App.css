@@ -80,10 +80,25 @@ body {
   width: 250px; /* Adjust the width as needed */
   height: calc(100% - 64px); /* Adjust based on the height of your TopBar */
   overflow-y: auto;
-  background-color: rgb(249, 249, 249, 0.7); /* Optional: Set a background color */
+  background-color: rgb(249, 249, 249, 0); /* Background color of the back of the sidebar */
   z-index: 999; /* Ensure it stays on top of other content */
   /* box-shadow: 2px 0 1px rgba(0, 0, 0, 0.1); */
   overflow-x: hidden;
+  padding-top: 10px; /* Add padding to the top to create space */
+}
+
+.connect-button {
+  display: block;
+  width: calc(100% - 20px); /* Adjust width to account for the padding */
+  margin: 0 auto; /* Center the button horizontally */
+  padding: 10px; /* 10px padding on all sides */
+  background-color: transparent; /* Transparent center */
+  color: #007bff; /* Blue text color */
+  border: 4px solid #007bff; /* Blue border */
+  border-radius: 10px; /* Round the corners */
+  cursor: pointer;
+  font-size: 16px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the font bold */
 }
 
 .dashboard-buttons {
@@ -156,7 +171,11 @@ body {
 }
 
 .menu {
-  padding-top: 15px;
+  background-color: rgba(255, 255, 255, 0); /* Background color with transparency */
+}
+
+.menu-item {
+  background-color: rgba(255, 255, 255, 0); /* Background color with transparency */
 }
 
 .discordButton {
