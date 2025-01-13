@@ -120,6 +120,18 @@ app.get('/char/:id', async (req, charres) => {
     })
 })
 
+app.get('/name/:id', async (req, nameres) => {
+    const { id } = req.params
+    if (!id) {
+        console.log("Id is missing")
+    }
+    const namesql = `select firstname, lastname from characters WHERE charidentifier = ?`;
+    db.query(namesql, [id], (err, data) => {
+        if(err) return nameres.json(err);
+        return nameres.json(data);
+    })
+})
+
 app.get('/getlogins/:id', async (req, res) => {
     const { id } = req.params
     if (!id) {
@@ -149,7 +161,7 @@ app.get('/getHorses/:id', async (req, res) => {
     if (!id) {
         console.log("Id is missing")
     }
-    const horsequery = `SELECT charid, name, gender, xp, born from player_horses WHERE  dead = 0 AND identifier = ?`;
+    const horsequery = `SELECT charid, name, gender, model, born from player_horses WHERE  dead = 0 AND identifier = ?`;
     db.query(horsequery, [id], (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
