@@ -9,8 +9,10 @@ const TesterApp = () => {
                 <TopBar />
             </div>
             <SidebarNav />
-            <h1>Tester App</h1>
-            <p>Welcome to the Tester App!</p>
+            <div className='test'>
+                <h1 style={{ textAlign: 'center', color: 'white', fontSize: '60px', marginBottom: '0px' }}>Dev Tester Application</h1>
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '20px', marginTop: '0px' }}>Help out the team here at Calico County</p>
+            </div>
         </div>
     );
 };
