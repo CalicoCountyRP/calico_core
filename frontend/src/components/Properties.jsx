@@ -39,11 +39,12 @@ function BuisnessGrid() {
         fetchData();
     }, []);
 
-    const handleButtonClick = (id, taxledger, common_name, price, location) => {
+    const handleButtonClick = (id, taxledger, common_name, price, image, location) => {
         const info = {
             id:id,
             name:common_name,
             price:price,
+            image:image,
             location:location,
             taxledger:taxledger
         }
@@ -74,7 +75,7 @@ function BuisnessGrid() {
                         <CardMedia
                             component="img"
                             height="140"
-                            image={item.imageUrl}
+                            image={item.image}
                             alt={item.name}
                         />
                         <CardContent>
@@ -86,7 +87,7 @@ function BuisnessGrid() {
                         </CardContent>
                         <CardActions sx={{ justifyContent: 'center' }}>
                             <Button size="small" 
-                            onClick={() => handleButtonClick(item.id, item.taxledger, item.common_name, item.price, item.location)} 
+                            onClick={() => handleButtonClick(item.id, item.taxledger, item.common_name, item.price, item.image, item.location)} 
                             sx={{
                                 backgroundColor: '#1976d2', // Primary color
                                 color: 'white',

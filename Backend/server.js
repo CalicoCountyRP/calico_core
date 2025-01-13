@@ -181,7 +181,7 @@ app.get('/getVehicles/:id', async (req, res) => {
 })
 
 app.get('/properties', async (req, res) => {
-    const propertiessql = "select id, common_name, price, location, taxledger, buyeridentifier from playerhousing WHERE owned = 0";
+    const propertiessql = "select id, common_name, price, location, image, taxledger, buyeridentifier from playerhousing WHERE owned = 0";
     db.query(propertiessql, (err, data)=> {
         if(err) return res.json(err);
         return res.json(data);
