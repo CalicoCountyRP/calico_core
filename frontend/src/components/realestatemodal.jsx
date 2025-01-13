@@ -3,7 +3,7 @@ import { Modal, Box, Typography, Button } from '@mui/material';
 import mapImage from '../assets/rdr.jpg'; // Import the image
 import '../App.css'; // Import the CSS file
 
-const RealEstateModal = ({ open, onClose, business }) => {
+const RealEstateModal = ({ open, onClose, business, isBusiness }) => {
     if (!business) return null;
 
     // Image dimensions
@@ -53,9 +53,11 @@ const RealEstateModal = ({ open, onClose, business }) => {
                 <Typography sx={{ mt: 2 }}>
                     Price: ${business.price}
                 </Typography>
+                {isBusiness && (
                 <Typography sx={{ mt: 2 }}>
                     Shop Type: {business.type}
                 </Typography>
+                )}
                 <div style={{ position: 'relative', width: '100%', height: '300px', marginTop: '20px' }}>
                     <img src={mapImage} alt="Map" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     <div style={markerStyle}></div>

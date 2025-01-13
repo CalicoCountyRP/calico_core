@@ -114,6 +114,7 @@ function BuisnessGrid( {businessData} ) {
                 open={isModalOpen}
                 onClose={handleCloseModal}
                 business={selectedBusiness}
+                isBusiness={true}
             /> 
         </Grid2>
     );

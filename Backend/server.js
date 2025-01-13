@@ -181,7 +181,7 @@ app.get('/getVehicles/:id', async (req, res) => {
 })
 
 app.get('/properties', async (req, res) => {
-    const propertiessql = "select id, taxledger, buyeridentifier from playerhousing WHERE owned = 0";
+    const propertiessql = "select id, common_name, price, location, taxledger, buyeridentifier from playerhousing WHERE owned = 0";
     db.query(propertiessql, (err, data)=> {
         if(err) return res.json(err);
         return res.json(data);
@@ -193,7 +193,7 @@ app.get('/ownedproperties', async(req, res) => {
     if (!steamID) {
         console.log("Steam Id is missing")
     }
-    const ownedpropertysql = 'select id, taxledger, from playerhousing WHERE buyeridentifier = ? AND owned = 1';
+    const ownedpropertysql = 'select id, common_name, taxledger, from playerhousing WHERE buyeridentifier = ? AND owned = 1';
     db.query(ownedpropertysql, [steamID], (err, data) => {
         if(err) return ownedpropertysql.json(err);
         return res.json(data);
