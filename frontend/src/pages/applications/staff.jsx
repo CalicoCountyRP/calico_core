@@ -9,8 +9,10 @@ const StaffApp = () => {
                 <TopBar />
             </div>
             <SidebarNav />
-            <h1>Staff App</h1>
-            <p>Welcome to the staff app!</p>
+            <div className='test'>
+                <h1 style={{ textAlign: 'center', color: 'white', fontSize: '60px', marginBottom: '0px' }}>Staff Application</h1>
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '20px', marginTop: '0px' }}>Help out the team here at Calico County</p>
+            </div>
         </div>
     );
 };
