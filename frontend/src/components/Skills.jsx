@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, Typography, CardMedia } from '@mui/material';
 import userPlaceholder from '../assets/userPlaceholder.png';
+import Loadingrevolver from '../assets/loading.gif';
 
 function CharacterGrid() {
     const [data, setData] = useState([]);
@@ -37,7 +38,7 @@ function CharacterGrid() {
     }, [discordID]);
     
     if (isLoading) {
-        return <Typography>Loading...</Typography>
+        return <img src={Loadingrevolver} alt="loading..."  style={{ width: '10%', height: '10%' }}  />
     }
 
     if (error) {

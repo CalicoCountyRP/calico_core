@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, CardActions, Button, Typography, CardMedia } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Loadingrevolver from '../assets/loading.gif';
 
 function BuisnessGrid() {
     const [data, setData] = useState([]);
@@ -48,7 +49,7 @@ function BuisnessGrid() {
     };
 
     if (isLoading) {
-        return <Typography>Loading...</Typography>;
+        return <img src={Loadingrevolver} alt="loading..."  style={{ width: '10%', height: '10%' }}  />
     }
 
     if (error) {
