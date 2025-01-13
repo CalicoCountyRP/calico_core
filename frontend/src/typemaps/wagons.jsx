@@ -1,4 +1,27 @@
 const WagonTypeMap = {
-    'wagontraveller01x': 'Traveller Wagon',
+    'buggy01': 'Buggy 1',
+    'buggy02': 'Buggy 2',
+    'buggy03': 'Buggy 3',
+    'coach3': 'Coach 3',
+    'coach4': 'Coach 4',
+    'coach5': 'Coach 5',
+    'coach6': 'Coach 6',
+    'cart01': 'Cart 1',
+    'cart02': 'Cart 2',
+    'cart03': 'Cart 3',
+    'cart04': 'Cart 4',
+    'cart06': 'Cart 6',
+    'cart07': 'Cart 7',
+    'cart08': 'Cart 8',
+    'huntercart01': 'Hunter Cart',
+    'supplywagon': 'Supply Wagon',
+    'wagontraveller01x': 'Travel Wagon',
+    'wagon02x': 'Wagon 2',
+    'wagon03x': 'Wagon 3',
+    'wagon04x': 'Wagon 4',
+    'wagon05x': 'Wagon 5',
+    'wagon06x': 'Wagon 6',
+    'chuckwagon000x': 'Chuck Wagon 1',
+    'chuckwagon002x': 'Chuck Wagon 2'
 };
 export default WagonTypeMap;
