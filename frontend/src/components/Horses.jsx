@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, CardActions, Button, Typography, CardMedia } from '@mui/material';
 import Loadingrevolver from '../assets/loading.gif';
+import BreedsTypeMap from '../typemaps/horsebreeds';
 
 function Horses({ steamID }) {
     const [data, setData] = useState([]);
@@ -63,6 +64,7 @@ function Horses({ steamID }) {
             {data.map((item) => {
                 const date = new Date(item.born);
                 const formattedDate = date.toISOString().split('T')[0]; // Convert to yyyy-mm-dd format
+                const typeString = BreedsTypeMap[item.model] || item.model;
 
                 return (
                     <Grid2 item xs={12} sm={6} md={4} lg={3} key={item.id}>
@@ -71,7 +73,7 @@ function Horses({ steamID }) {
                                 <Typography gutterBottom variant="h5" component="div">{item.name}</Typography>
                                 <Typography variant="body2" color="text.secondary"> <b>Owned By:</b> {firstlast} </Typography>
                                 <Typography variant="body2" color="text.secondary"> <b>Gender:</b> {item.gender} </Typography>
-                                <Typography variant="body2" color="text.secondary"> <b>Breed:</b> {item.model} </Typography>
+                                <Typography variant="body2" color="text.secondary"> <b>Breed:</b> {typeString} </Typography>
                                 <Typography variant="body2" color="text.secondary"> <b>DOB:</b> {formattedDate} </Typography>
                             </CardContent>
                         </Card>

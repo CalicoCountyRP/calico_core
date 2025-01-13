@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid2, Card, CardContent, CardActions, Button, Typography, CardMedia } from '@mui/material';
 import Loadingrevolver from '../assets/loading.gif';
+import WagonTypeMap from '../typemaps/wagons';
 
 function Wagons({ steamID }) {
     const [data, setData] = useState([]);
@@ -61,20 +62,24 @@ function Wagons({ steamID }) {
 
     return (
         <Grid2 container spacing={2}>
-            {data.map((item) => (
-                <Grid2 item xs={12} sm={6} md={4} lg={3} key={item.id}>
-                    <Card sx={{ width: 300, height: 130 }}> {/* Set the desired width and height */}
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                {item.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary"> <b>Owned By:</b> {firstlast} </Typography>
-                            <Typography variant="body2" color="text.secondary"> <b>Type:</b> {item.model} </Typography>
-                            <Typography variant="body2" color="text.secondary"> <b>Condition:</b> {item.condition}% </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid2>
-            ))}
+            {data.map((item, index) => {
+                const typeString = WagonTypeMap[item.model] || item.model; // Translate type string to user-friendly name
+
+                return (
+                    <Grid2 item xs={12} sm={6} md={4} lg={3} key={item.id}>
+                        <Card sx={{ width: 300, height: 130 }}> {/* Set the desired width and height */}
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    {item.name}
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary"> <b>Owned By:</b> {firstlast[index]} </Typography>
+                                <Typography variant="body2" color="text.secondary"> <b>Type:</b> {typeString} </Typography>
+                                <Typography variant="body2" color="text.secondary"> <b>Condition:</b> {item.condition}% </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid2>
+                );
+            })}
         </Grid2>
     );
 }
