@@ -38,13 +38,14 @@ function BuisnessGrid( {businessData} ) {
         setBizData(businessData);
     }, [businessData]);
 
-    const handleButtonClick = (id, name, image, location, price) => {
+    const handleButtonClick = (id, name, image, location, price, type) => {
         const info = {
             id:id,
             name:name,
             image:image,
             location:location,
-            price:price
+            price:price,
+            type:type
         }
  
         //navigate(`/buisnessinfo/${id}`, { state: info });
@@ -63,7 +64,7 @@ function BuisnessGrid( {businessData} ) {
         <Grid2 container spacing={2} justifyContent="center" alignItems="center" sx={{ marginTop: 4 }}>
             {data.map((item) => (
                 <Grid2 item xs={12} sm={6} md={4} lg={3} key={item.id}>
-                    <Card sx={{ width: 300, height: 400 }}> {/* Set the desired width and height */}
+                    <Card sx={{ width: 300, height: 390 }}> {/* Set the desired width and height */}
                         <CardMedia
                             component="img"
                             height="140"
@@ -78,6 +79,9 @@ function BuisnessGrid( {businessData} ) {
                                 Property ID: {item.id}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
+                                Shop Type: {item.type}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
                                 Location: {item.location}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
@@ -88,7 +92,7 @@ function BuisnessGrid( {businessData} ) {
                         <CardActions sx={{ justifyContent: 'center' }}>
                             <Button
                                 size="small"
-                                onClick={() => handleButtonClick(item.id, item.name, item.image, item.location, item.price)}
+                                onClick={() => handleButtonClick(item.id, item.name, item.image, item.location, item.price, item.type)}
                                 sx={{
                                     backgroundColor: '#1976d2', // Primary color
                                     color: 'white',
