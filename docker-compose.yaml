@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   frontend:
     container_name: "core_frontend"
@@ -7,8 +5,10 @@ services:
       context: ./frontend
     ports:
       - "5173:5173"
-    networks:
-      - calicocore
+    environment:
+      VITE_REACT_API_URL: http://core.calicocountyrp.com:8081
+    stdin_open: true
+    restart: always
 
   backend:
     container_name: "core_backend"
@@ -18,5 +18,16 @@ services:
       - "8081:8081"
     depends_on:
       - frontend
-    networks:
-      - calicocore
+    environment:
+      host: server.wilkerepair.com
+      user: mwilke16
+      password: North4ever!
+      database: dev
+      PORT: 8081
+      discordlink: https://discord.com/oauth2/authorize?client_id=1309222716766949386&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8081%2Fauth%2Fdiscord%2Fcallback&scope=identify
+      disocrdClientID: 1309222716766949386
+      discordClientSecret: PcQebnETUwgC5mOWbAQqHmkIBXiC54c_
+      secret: supersecret
+      redirectURI: http://core.calicocountyrp.com:8081/auth/discord/callback
+      clientredirect: "http://core.calicocountyrp.com:5173"
+      urlbase: "http://core.calicocountyrp.com:5173"

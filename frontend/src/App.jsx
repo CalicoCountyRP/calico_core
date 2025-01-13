@@ -21,7 +21,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/auth/check`, { credentials: 'include' });
+        const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/auth/check`, { credentials: 'include'});
         if (response.ok) {
           setIsAuthenticated(true);
         }
