@@ -53,6 +53,9 @@ const RealEstateModal = ({ open, onClose, business }) => {
                 <Typography sx={{ mt: 2 }}>
                     Price: ${business.price}
                 </Typography>
+                <Typography sx={{ mt: 2 }}>
+                    Shop Type: {business.type}
+                </Typography>
                 <div style={{ position: 'relative', width: '100%', height: '300px', marginTop: '20px' }}>
                     <img src={mapImage} alt="Map" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     <div style={markerStyle}></div>
