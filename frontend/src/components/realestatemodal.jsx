@@ -41,6 +41,7 @@ const RealEstateModal = ({ open, onClose, business, isBusiness }) => {
                 overflow: 'hidden',
                 position: 'relative',
             }}>
+                <img src={business.image} alt={business.name} style={{ width: '100%', height: 'auto', marginBottom: '20px' }} />
                 <Typography variant="h6" component="h2">
                     {business.name}
                 </Typography>
@@ -58,7 +59,7 @@ const RealEstateModal = ({ open, onClose, business, isBusiness }) => {
                     Shop Type: {business.type}
                 </Typography>
                 )}
-                <div style={{ position: 'relative', width: '100%', height: '300px', marginTop: '20px' }}>
+                <div style={{ position: 'relative', width: '100%', height: '150px', marginTop: '20px' }}>
                     <img src={mapImage} alt="Map" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     <div style={markerStyle}></div>
                 </div>
