@@ -30,11 +30,11 @@ function SidebarNav() {
                         <MenuItem className="menu-item" component={<Link to="/pages/businesses" />}>Businesses</MenuItem>
                         <MenuItem className="menu-item" component={<Link to="/pages/properties" />}>Properties</MenuItem>
                     </SubMenu>
-                    <SubMenu style={{ color: '#FFFFFF', }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0)'} label="Applications" icon={<GiScrollQuill />}>
+{/*                     <SubMenu style={{ color: '#FFFFFF', }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0)'} label="Applications" icon={<GiScrollQuill />}>
                         <MenuItem className="menu-item" component={<Link to="/pages/applications/staff" />}>Staff Application</MenuItem>
                         <MenuItem className="menu-item" component={<Link to="/pages/applications/developer" />}>Developer Application</MenuItem>
                         <MenuItem className="menu-item" component={<Link to="/pages/applications/tester" />}>Dev Tester Application</MenuItem>
-                    </SubMenu>
+                    </SubMenu> */}
                 </Menu>
             </Sidebar>
         </div>
