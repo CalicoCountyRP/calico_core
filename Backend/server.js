@@ -5,7 +5,10 @@ require('dotenv').config()
 const cookieParser = require('cookie-parser');
 
 const app = express()
-app.use(cors({ origin: process.env.urlbase, credentials: true }))
+app.use(cors({
+    origin: process.env.urlbase,
+    credentials: true
+}));
 app.use(cookieParser())
 
 const db = mysql.createConnection({
@@ -16,7 +19,7 @@ const db = mysql.createConnection({
 })
 
 app.get('/', (req, res)=> {
-    return res.json("From Backend");
+    res.redirect('https://core.calicocountyrp.com');
 })
 
 app.get('/auth/discord/login', (req, res) => {
