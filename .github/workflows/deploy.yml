@@ -3,6 +3,7 @@ name: Deploy Calico County Core
 on:
   push:
     branches: [ main ]
+  workflow_dispatch: {}
 
 jobs:
   deploy:
