@@ -18,15 +18,25 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy with rsync (excluding large directories)
+      run: |
+        # Deploy with rsync, excluding node_modules and other large directories
+        #rsync -avz \ #--delete \
+        #  --exclude=node_modules \
+        #  --exclude=.git \
+        #  --exclude=.github \
+        #  --exclude=.vscode \
+        #  --exclude=*.log \
+        #  --exclude=*.tar \
+        #  -e "ssh -i ~/.ssh/id_rsa" \
+          ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/core/
         
-    - name: Deploy to server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          cd ${{ secrets.PROJECT_PATH }}
-          git pull
-          docker-compose down
-          docker-compose up -d --build
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+        cd /var/www/core/Backend
+        docker build -t core-backend .
+        docker stop core-backend || true
+        docker rm core-backend || true
+        docker run -d --name core-backend --restart unless-stopped -p 5002:5002 core-backend
+        EOF
+
