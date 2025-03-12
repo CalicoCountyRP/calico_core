@@ -1,22 +1,20 @@
 name: Deploy Calico County Core
-
 on:
   push:
     branches: [ main ]
   workflow_dispatch: {}
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v4
-
+    
     - name: Install Dependencies
       run: | 
         cd frontend/
         npm install
-
+        
     - name: Build Frontend
       run: |
         cd frontend/
@@ -28,10 +26,9 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-    - name: Deploy with rsync (excluding large directories)
+        
+    - name: Deploy with rsync
       run: |
-        # Deploy with rsync, excluding node_modules and other large directories
         rsync -avz --delete \
           --exclude=node_modules \
           --exclude=.git \
@@ -42,11 +39,12 @@ jobs:
           -e "ssh -i ~/.ssh/id_rsa" \
           ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/core/ccrp_core/
         
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-        cd /var/www/core/ccrp_core/Backend
-        docker build -t core-backend .
-        docker stop core-backend || true
-        docker rm core-backend || true
-        docker run -d --name core-backend --restart unless-stopped -p 5002:5002 core-backend
-        EOF
-
+    - name: Deploy Backend
+      run: |
+        ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+          cd /var/www/core/ccrp_core/Backend && 
+          docker build -t core-backend . &&
+          docker stop core-backend || true &&
+          docker rm core-backend || true &&
+          docker run -d --name core-backend --restart unless-stopped -p 8081:8081 --env-file .env core-backend
+        "
