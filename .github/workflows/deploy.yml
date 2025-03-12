@@ -18,7 +18,9 @@ jobs:
         npm install
 
     - name: Build Frontend
-      run: npm run build
+      run: |
+        cd frontend/
+        npm run build
     
     - name: Setup SSH
       run: |
