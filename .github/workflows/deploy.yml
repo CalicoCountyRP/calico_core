@@ -40,10 +40,10 @@ jobs:
           --exclude=*.log \
           --exclude=*.tar \
           -e "ssh -i ~/.ssh/id_rsa" \
-          ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/core/
+          ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/core/ccrp_core/
         
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-        cd /var/www/core/Backend
+        cd /var/www/core/ccrp_core/Backend
         docker build -t core-backend .
         docker stop core-backend || true
         docker rm core-backend || true
