@@ -1,4 +1,0 @@
-#rename this file to .env
-#if needed, This can be .env.development or .env.production if you need to set this up as a developmemnt env.
-
-VITE_REACT_API_URL = "http://localhost:8081"
