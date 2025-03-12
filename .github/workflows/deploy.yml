@@ -11,6 +11,14 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+
+    - name: Install Dependencies
+      run: | 
+        cd frontend/
+        npm install
+
+    - name: Build Frontend
+      run: npm run build
     
     - name: Setup SSH
       run: |
@@ -22,14 +30,14 @@ jobs:
     - name: Deploy with rsync (excluding large directories)
       run: |
         # Deploy with rsync, excluding node_modules and other large directories
-        #rsync -avz \ #--delete \
-        #  --exclude=node_modules \
-        #  --exclude=.git \
-        #  --exclude=.github \
-        #  --exclude=.vscode \
-        #  --exclude=*.log \
-        #  --exclude=*.tar \
-        #  -e "ssh -i ~/.ssh/id_rsa" \
+        rsync -avz --delete \
+          --exclude=node_modules \
+          --exclude=.git \
+          --exclude=.github \
+          --exclude=.vscode \
+          --exclude=*.log \
+          --exclude=*.tar \
+          -e "ssh -i ~/.ssh/id_rsa" \
           ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/core/
         
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
