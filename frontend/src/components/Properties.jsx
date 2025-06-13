@@ -58,6 +58,33 @@ function BuisnessGrid() {
         setSelectedProperty(null);
     };
 
+    const worldBounds = {
+        minX: -3500,   // the far‑left edge in RedM X coords
+        maxX:  5500,   // the far‑right edge
+        minY: -4500,   // the bottom
+        maxY:  7000    // the top
+    };
+
+    // your actual image dimensions
+    const imgWidth  = 1024;
+    const imgHeight = 768;
+
+    function mapWorldToPixel({ x, y }) {
+        // normalize X from [minX…maxX] → [0…1]
+        const normX = (x - worldBounds.minX) 
+                    / (worldBounds.maxX - worldBounds.minX);
+
+        // normalize Y…but remember in pixels Y=0 is _top_ so we invert:
+        const normY = 1 - ( (y - worldBounds.minY)
+                        / (worldBounds.maxY - worldBounds.minY) );
+
+        // convert to pixel coords
+        return {
+            px: normX * imgWidth,
+            py: normY * imgHeight
+        };
+    }
+
 
     if (isLoading) {
         return <img src={Loadingrevolver} alt="loading..."  style={{ width: '10%', height: '10%' }}  />

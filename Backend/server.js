@@ -11,6 +11,16 @@ app.use(cors({
 }));
 app.use(cookieParser())
 
+const pool = mysql.createPool({
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database,
+    connectionLimit: 10,
+    waitForConnections: true,
+    queueLimit: 0
+});
+
 const db = mysql.createConnection({
     host: process.env.host,
     user: process.env.user,
@@ -70,17 +80,52 @@ app.get('/auth/discord/callback', async (req, res) => {
         }
 
         const userData = await userResponse.json();
+        
+        // Get all player identifiers using Discord ID
+        const identifierQuery = `
+            SELECT c.identifier, c.charidentifier, c.firstname, c.lastname,
+                   pi.steam_name, pi.steamid, pi.ip
+            FROM characters c
+            LEFT JOIN player_info pi ON c.identifier = pi.identifier
+            WHERE c.discordid = ?
+            LIMIT 1`;
 
-        const user = { username: userData.username, id: userData.id, global: userData.global_name }; // Replace with actual user info
-        const redirectURL = process.env.clientredirect
+        db.query(identifierQuery, [userData.id], (err, identifierResults) => {
+            if (err) {
+                console.error('Identifier lookup error:', err);
+                return res.status(500).json({ message: 'Database error' });
+            }
 
-        res.cookie('auth', JSON.stringify(user), { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+            const userIdentifiers = identifierResults[0] || {};
+            
+            // Create enhanced user object with all identifiers
+            const user = {
+                username: userData.username,
+                id: userData.id,
+                global: userData.global_name,
+                steamId: userIdentifiers.steamid || null,
+                steamIdentifier: userIdentifiers.identifier || null,
+                steamName: userIdentifiers.steam_name || null,
+                charId: userIdentifiers.charidentifier || null,
+                firstName: userIdentifiers.firstname || null,
+                lastName: userIdentifiers.lastname || null
+            };
 
-        res.redirect(`${redirectURL}/pages/dashboard?user=${encodeURIComponent(JSON.stringify(user))}`);
+            const redirectURL = process.env.clientredirect;
+
+            // Set enhanced cookie with all user data
+            res.cookie('auth', JSON.stringify(user), { 
+                httpOnly: true, 
+                secure: process.env.NODE_ENV === 'production', 
+                sameSite: 'strict' 
+            });
+
+            res.redirect(`${redirectURL}/pages/dashboard?user=${encodeURIComponent(JSON.stringify(user))}`);
+        });
 
     } catch (error) {
-        console.error('Error Processing Discord Callback:', error.response?.data || error.message);
-        res.send(500).send('Error during Discord authenticiation');
+        console.error('Error Processing Discord Callback:', error);
+        res.status(500).send('Error during Discord authentication');
     }
 })
 
@@ -219,6 +264,68 @@ app.get('/forsale', (req, res) => {
         return res.json(data)
     })
 })
+
+app.get('/auth/role', async (req, res) => {
+    try {
+        const user = req.cookies.auth;
+        if (!user) {
+            return res.status(401).json({ message: 'Not authenticated' });
+        }
+
+        const parsedUser = JSON.parse(user);
+        console.log('Parsed user data:', parsedUser);
+
+        if (!parsedUser.steamIdentifier) {
+            console.log('No Steam identifier in cookie data');
+            return res.json({ 
+                role: 'user',
+                steamIdentifier: null,
+                message: 'No Steam identifier found'
+            });
+        }
+
+        // Use Steam identifier directly from cookie data
+        const roleQuery = 'SELECT `group` FROM users WHERE identifier = ?';
+        
+        db.query(roleQuery, [parsedUser.steamIdentifier], (err, results) => {
+            if (err) {
+                console.error('Group lookup error:', err);
+                return res.status(500).json({ message: 'Database error' });
+            }
+
+            if (results.length === 0) {
+                console.log('No user found for Steam ID:', parsedUser.steamIdentifier);
+                return res.json({ 
+                    role: 'user',
+                    steamIdentifier: parsedUser.steamIdentifier,
+                    message: 'No user found'
+                });
+            }
+
+            let role = 'user';
+            switch(results[0].group) {
+                case 'admin':
+                    role = 'admin';
+                    break;
+                case 'realtor':
+                    role = 'realtor';
+                    break;
+                default:
+                    role = 'user';
+            }
+
+            console.log('Role determined:', role);
+            res.json({ 
+                role: role,
+                steamIdentifier: parsedUser.steamIdentifier,
+                group: results[0].group
+            });
+        });
+    } catch (error) {
+        console.error('Error checking role:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 const port = process.env.PORT || 8081
 
