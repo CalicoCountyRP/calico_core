@@ -4,28 +4,25 @@ import mapImage from '../assets/rdr.jpg'; // Import the image
 import '../App.css'; // Import the CSS file
 
 const RealEstateModal = ({ open, onClose, business, isBusiness }) => {
-    if (!business) return null;
+    // Add these constants at the top of your component
+    const imageWidth = 1024;  // Map image width
+    const imageHeight = 768;  // Map image height
 
-    // Image dimensions
-    const imageWidth = 7200;
-    const imageHeight = 5400;
-
-    console.log("a", business)
-
-    // Convert business coordinates to percentages
     const markerStyle = {
         position: 'absolute',
-        top: `${(business.latitude / imageHeight) * 100}%`, // Convert to percentage
-        left: `${(business.longitude / imageWidth) * 100}%`, // Convert to percentage
+        top: `${(business?.latitude || 0)}px`,
+        left: `${(business?.longitude || 0)}px`,
         transform: 'translate(-50%, -50%)',
         width: '20px',
         height: '20px',
         backgroundColor: 'red',
         borderRadius: '50%',
+        border: '2px solid white',
+        boxShadow: '0 0 4px rgba(0,0,0,0.5)',
+        zIndex: 1000
     };
 
-    console.log('Latitude:', business.latitude);
-    console.log('Longitude:', business.longitude);
+    if (!business) return null;
 
     return (
         <Modal open={open} onClose={onClose}>
@@ -38,12 +35,20 @@ const RealEstateModal = ({ open, onClose, business, isBusiness }) => {
                 bgcolor: 'background.paper', 
                 boxShadow: 24, 
                 p: 4,
-                overflow: 'hidden',
-                position: 'relative',
+                borderRadius: 2,
+                maxHeight: '90vh',
+                overflow: 'auto'
             }}>
-                <img src={business.image} alt={business.name} style={{ width: '100%', height: 'auto', marginBottom: '20px' }} />
+                {/* Property Image */}
+                <img 
+                    src={business?.image} 
+                    alt={business?.name} 
+                    style={{ width: '100%', height: 'auto', marginBottom: '20px' }} 
+                />
+
+                {/* Property Details */}
                 <Typography variant="h6" component="h2">
-                    {business.name}
+                    {business?.name}
                 </Typography>
                 <Typography sx={{ mt: 2 }}>
                     Property ID: {business.id}
@@ -59,10 +64,32 @@ const RealEstateModal = ({ open, onClose, business, isBusiness }) => {
                     Shop Type: {business.type}
                 </Typography>
                 )}
-                <div style={{ position: 'relative', width: '100%', height: '150px', marginTop: '20px' }}>
-                    <img src={mapImage} alt="Map" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    <div style={markerStyle}></div>
+
+                {/* Map Container */}
+                <div style={{ 
+                    position: 'relative', 
+                    width: '100%', 
+                    height: '300px', 
+                    marginTop: '20px',
+                    overflow: 'hidden',
+                    borderRadius: '8px'
+                }}>
+                    {/* Map Image */}
+                    <img 
+                        src="/map.png" 
+                        alt="Map" 
+                        style={{ 
+                            width: '100%', 
+                            height: '100%', 
+                            objectFit: 'cover' 
+                        }} 
+                    />
+                    
+                    {/* Location Marker */}
+                    {business && <div style={markerStyle} />}
                 </div>
+
+                {/* Rest of your modal content */}
                 <Button onClick={onClose} sx={{ mt: 2 }}>Close</Button>
             </Box>
         </Modal>

@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "memory-bank-mcp": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@aakarsh-sasi/memory-bank-mcp",
+        "--key",
+        "9a278485-c2cb-4aa9-8119-d62732031d62"
+      ]
+    }
+  }
+}

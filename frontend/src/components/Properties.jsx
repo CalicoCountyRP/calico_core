@@ -39,15 +39,44 @@ function BuisnessGrid() {
         fetchData();
     }, []);
 
-    const handleButtonClick = (id, taxledger, common_name, price, image, location) => {
-        const info = {
-            id:id,
-            name:common_name,
-            price:price,
-            image:image,
-            location:location,
-            taxledger:taxledger
+    // First, add this helper function at the top of your component
+    const parseLocationData = (locationString) => {
+        try {
+            // Parse the JSON string into an object
+            const locationData = JSON.parse(locationString);
+            
+            // Since it's an array with one object, get the first item
+            const coords = locationData[0];
+            
+            // Return the x and y coordinates
+            return {
+                x: coords.x || 0,
+                y: coords.y || 0
+            };
+        } catch (error) {
+            console.error('Error parsing location data:', error);
+            return { x: 0, y: 0 }; // Default coordinates if parsing fails
         }
+    };
+
+    // Modified your handleButtonClick function
+    const handleButtonClick = (id, taxledger, common_name, price, image, location) => {
+        // Parse the location data
+        const coords = parseLocationData(location);
+        
+        // Map the coordinates to pixel values
+        const pixelCoords = mapWorldToPixel(coords);
+
+        const info = {
+            id: id,
+            name: common_name,
+            price: price,
+            image: image,
+            location: `X: ${coords.x.toFixed(2)}, Y: ${coords.y.toFixed(2)}`, // Format for display
+            taxledger: taxledger,
+            latitude: pixelCoords.py,
+            longitude: pixelCoords.px
+        };
 
         setSelectedProperty(info);
         setIsModalOpen(true);
@@ -106,11 +135,21 @@ function BuisnessGrid() {
                             alt={item.name}
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="div"> {item.common_name} </Typography>
-                            <Typography variant="body2" color="text.secondary">Property ID: {item.id} </Typography>
-                            <Typography variant="body2" color="text.secondary">Location: {item.location} </Typography>
-                            <Typography variant="body2" color="text.secondary">Price: ${item.price} </Typography>
-                            {/* <Typography variant="body2" color="text.secondary"> {item.taxledger} </Typography> */}
+                            <Typography gutterBottom variant="h5" component="div">
+                                {item.common_name}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Property ID: {item.id}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Location: {(() => {
+                                    const coords = parseLocationData(item.location);
+                                    return `X: ${coords.x.toFixed(2)}, Y: ${coords.y.toFixed(2)}`;
+                                })()}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Price: ${item.price}
+                            </Typography>
                         </CardContent>
                         <CardActions sx={{ justifyContent: 'center' }}>
                             <Button size="small" 
